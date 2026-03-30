@@ -3,46 +3,626 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcelo Schmidt</title>
+    <title>Marcelo Schmidt — Tech, Policy & Life in Portugal</title>
+    <meta name="description" content="Marcelo Schmidt — technologist, patent holder, policy nerd, and expat living in Portugal. Networking infrastructure, AI, economics, and racket sports.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #0c0c0c;
+            --bg-card: #161616;
+            --bg-card-hover: #1c1c1c;
+            --text: #e8e8e8;
+            --text-muted: #888;
+            --text-dim: #555;
+            --accent: #4ecdc4;
+            --accent-secondary: #ff6b6b;
+            --accent-gold: #f0c040;
+            --border: #222;
+            --gradient-1: linear-gradient(135deg, #4ecdc4 0%, #44b8a8 100%);
+            --gradient-2: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(12, 12, 12, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+        }
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+        }
+        nav .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            transition: color 0.2s;
+        }
+        nav .nav-links a:hover { color: var(--accent); }
+
+        /* ─── HERO ─── */
+        .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
         }
-        .container {
-            text-align: center;
-            padding: 2rem;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 20% 50%, rgba(78,205,196,0.06) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 20%, rgba(255,107,107,0.04) 0%, transparent 50%);
+            pointer-events: none;
         }
-        h1 {
-            font-size: 3rem;
-            font-weight: 300;
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+        }
+        .hero-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
             letter-spacing: 0.15em;
-            color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        .hero h1 .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+        .hero-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .hero-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.25s;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg);
+        }
+        .btn-primary:hover {
+            background: #5dddd4;
+            transform: translateY(-1px);
+        }
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* ─── SECTIONS ─── */
+        section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+        }
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ─── CARDS GRID ─── */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        .card:hover {
+            background: var(--bg-card-hover);
+            border-color: #333;
+            transform: translateY(-3px);
+        }
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .card p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ─── INTERESTS ─── */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .interest-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        .interest-item:hover {
+            border-color: #333;
+            transform: translateY(-2px);
+        }
+        .interest-emoji {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        .interest-item h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        .interest-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ─── TIMELINE ─── */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            bottom: 0.5rem;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.6rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--bg);
+        }
+        .timeline-item .period {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.3rem;
+        }
+        .timeline-item h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+        .timeline-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ─── PATENTS ─── */
+        .patent-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin-bottom: 1.25rem;
+            transition: all 0.3s;
+        }
+        .patent-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        .patent-card .patent-id {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.4rem;
+        }
+        .patent-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
         }
-        .tagline {
-            font-size: 1.1rem;
-            color: #888;
-            letter-spacing: 0.05em;
+        .patent-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.7;
         }
-        .status {
-            margin-top: 2rem;
-            font-size: 0.85rem;
-            color: #555;
+
+        /* ─── COMMUNITY ─── */
+        .community-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+        .community-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        .community-item .comm-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .community-item h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .community-item p { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* ─── FOOTER ─── */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+        footer a { color: var(--accent); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 640px) {
+            nav .nav-links a { margin-left: 1rem; font-size: 0.8rem; }
+            .hero { padding-top: 5rem; }
+            section { padding: 3rem 1.25rem; }
+            .cards { grid-template-columns: 1fr; }
+            .interests-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>MARCELO SCHMIDT</h1>
-        <p class="tagline">Coming soon</p>
-        <p class="status">schmidtmarcelo.com</p>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <div class="logo">MS</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#interests">Interests</a>
+            <a href="#career">Career</a>
+            <a href="#community">Community</a>
+        </div>
     </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-content">
+        <div class="hero-tag">// hello world</div>
+        <h1>I'm <span class="highlight">Marcelo Schmidt</span>.<br>Tech builder, policy nerd,<br>racket sports addict.</h1>
+        <p class="hero-sub">
+            25+ years building networking infrastructure and IoT platforms in Silicon Valley. 
+            Two patents. A robotics coach. Now living in Portugal, where I split my time between 
+            economics debates, tennis courts, and explaining BGP routing to people who didn't ask.
+        </p>
+        <div class="hero-links">
+            <a href="https://linkedin.com/in/schmidtmarcelo" target="_blank" class="btn-primary">
+                LinkedIn →
+            </a>
+            <a href="#about" class="btn-secondary">
+                Learn more ↓
+            </a>
+        </div>
+    </div>
+</div>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="section-label">01 — About</div>
+    <h2 class="section-title">The short version</h2>
+    <div class="cards">
+        <div class="card">
+            <div class="card-icon">🧑‍💻</div>
+            <h3>The tech side</h3>
+            <p>
+                I've spent most of my career deep in networking infrastructure, monitoring systems, 
+                and IoT platforms. I've designed BGP route servers, built asset monitoring alarm systems, 
+                and led engineering teams across startups and enterprises. I like the plumbing of the 
+                internet — the stuff nobody sees until it breaks.
+            </p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🌍</div>
+            <h3>The life side</h3>
+            <p>
+                Born in Brazil, built a career in Silicon Valley, now calling Cascais, Portugal home. 
+                I'm retired from the 9-to-5 grind but not from being curious. I spend my days on 
+                tennis and padel courts, mountain biking coastal trails, reading about economics, 
+                and having opinions about monetary policy that nobody asked for.
+            </p>
+        </div>
+        <div class="card">
+            <div class="card-icon">💡</div>
+            <h3>The philosophy</h3>
+            <p>
+                Technology should be explained simply. Policy should be debated openly. 
+                Sports should be played frequently. Dogs should be spoiled unconditionally.
+                I follow all four rules strictly.
+            </p>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- INTERESTS -->
+<section id="interests">
+    <div class="section-label">02 — What I'm Into</div>
+    <h2 class="section-title">Interests & rabbit holes</h2>
+    <div class="interests-grid">
+        <div class="interest-item">
+            <div class="interest-emoji">🤖</div>
+            <div>
+                <h4>AI & Autonomous Systems</h4>
+                <p>From AI agents to cybersecurity implications — how autonomous systems reshape trust, work, and infrastructure.</p>
+            </div>
+        </div>
+        <div class="interest-item">
+            <div class="interest-emoji">📡</div>
+            <div>
+                <h4>Networking & Infrastructure</h4>
+                <p>BGP, routing, IoT, monitoring — the invisible systems that keep the internet running. My first love.</p>
+            </div>
+        </div>
+        <div class="interest-item">
+            <div class="interest-emoji">📊</div>
+            <div>
+                <h4>Economics & Policy</h4>
+                <p>Fiscal policy, immigration economics, housing markets, tax strategy. I read central bank reports for fun. Don't judge me.</p>
+            </div>
+        </div>
+        <div class="interest-item">
+            <div class="interest-emoji">🏛️</div>
+            <div>
+                <h4>Geopolitics</h4>
+                <p>US-EU dynamics, migration patterns, trade policy. Living between two continents gives you a front-row seat.</p>
+            </div>
+        </div>
+        <div class="interest-item">
+            <div class="interest-emoji">🎾</div>
+            <div>
+                <h4>Racket Sports</h4>
+                <p>Tennis and padel, multiple times a week. Cascais has incredible courts. My serve still needs work, but my drop shots are sneaky.</p>
+            </div>
+        </div>
+        <div class="interest-item">
+            <div class="interest-emoji">🚴</div>
+            <div>
+                <h4>Mountain Biking</h4>
+                <p>Coastal trails around Sintra and Cascais. Nothing clears your head like a single-track descent with an ocean view.</p>
+            </div>
+        </div>
+        <div class="interest-item">
+            <div class="interest-emoji">🔭</div>
+            <div>
+                <h4>Physics & Space</h4>
+                <p>Quantum mechanics, cosmology, astrophysics. The universe is wild and I want to understand as much of it as one lifetime allows.</p>
+            </div>
+        </div>
+        <div class="interest-item">
+            <div class="interest-emoji">🐕</div>
+            <div>
+                <h4>Dogs</h4>
+                <p>Three of them. They run the house. I just pay the vet bills and pretend I'm in charge.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- CAREER -->
+<section id="career">
+    <div class="section-label">03 — Career</div>
+    <h2 class="section-title">Professional journey</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="period">25+ YEARS IN TECH</div>
+            <h3>Networking, Infrastructure & IoT</h3>
+            <p>
+                Built and led engineering teams focused on networking infrastructure, 
+                asset monitoring, and IoT platforms across Silicon Valley. From startups to 
+                enterprise-scale systems — always working on the critical infrastructure 
+                layer that everything else depends on.
+            </p>
+        </div>
+        <div class="timeline-item">
+            <div class="period">PATENTS</div>
+            <h3>Two U.S. Patents</h3>
+            <p>
+                Invented systems for intelligent alarm management in infrastructure monitoring 
+                and BGP route server architectures for multi-provider networks. The kind of 
+                problems that keep network engineers up at 3 AM — I built solutions so they 
+                could sleep.
+            </p>
+        </div>
+        <div class="timeline-item">
+            <div class="period">NOW</div>
+            <h3>Retired in Portugal 🇵🇹</h3>
+            <p>
+                Stepped away from the corporate world, relocated to Cascais, and now focus on 
+                what actually interests me: understanding AI's impact on security and work, 
+                tracking economic policy across continents, writing about technology and 
+                immigration, and playing way too much tennis.
+            </p>
+        </div>
+    </div>
+
+    <div style="margin-top: 3rem;">
+        <h3 style="font-size: 1.1rem; margin-bottom: 1.25rem;">Patents</h3>
+        <div class="patent-card">
+            <div class="patent-id">US 10,574,558 — Issued Feb 2020</div>
+            <h3>Limiting Alarms in an Asset Monitoring System</h3>
+            <p>
+                A smart alarm suppression system that prevents alert fatigue in infrastructure 
+                monitoring. Uses one-time trigger conditions to suppress notifications until 
+                an alarm condition has been validated — reducing noise while keeping 
+                critical alerts front and center.
+            </p>
+        </div>
+        <div class="patent-card">
+            <div class="patent-id">US 08849351.5 — Issued Nov 2007</div>
+            <h3>BGP Route Server for Multi-Provider Networks</h3>
+            <p>
+                A route server architecture that connects users to multiple ISPs, maintaining 
+                multiple routing table views and BGP instances to optimize path selection. 
+                Think of it as a smart traffic director for internet routing — matching users 
+                to the best available path across competing providers.
+            </p>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- COMMUNITY -->
+<section id="community">
+    <div class="section-label">04 — Community</div>
+    <h2 class="section-title">Giving back</h2>
+    <div class="community-list">
+        <div class="community-item">
+            <div class="comm-icon">🤖</div>
+            <div>
+                <h4>VEX Robotics — Judge & Coach</h4>
+                <p>7 years coaching kids in competitive robotics. STEM education, teamwork, and the joy of watching a robot you built actually work (sometimes).</p>
+            </div>
+        </div>
+        <div class="community-item">
+            <div class="comm-icon">🧠</div>
+            <div>
+                <h4>Services for Brain Injury (SBI)</h4>
+                <p>Board of Directors for a Bay Area nonprofit helping brain injury survivors regain independence and return to work.</p>
+            </div>
+        </div>
+        <div class="community-item">
+            <div class="comm-icon">⚽</div>
+            <div>
+                <h4>AYSO Soccer Coach</h4>
+                <p>Coached elementary school kids in Palo Alto. Teaching offsides to 8-year-olds is harder than BGP configuration. I'm serious.</p>
+            </div>
+        </div>
+        <div class="community-item">
+            <div class="comm-icon">🏥</div>
+            <div>
+                <h4>St. Jude Children's Research Hospital</h4>
+                <p>Volunteer supporting the mission that no child is denied treatment regardless of a family's ability to pay.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-links">
+        <a href="https://linkedin.com/in/schmidtmarcelo" target="_blank">LinkedIn</a>
+        <a href="mailto:schmidtmarcelo@pm.me">Contact</a>
+    </div>
+    <p>© 2026 Marcelo Schmidt — Cascais, Portugal 🇵🇹</p>
+</footer>
+
 </body>
 </html>
