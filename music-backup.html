@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music — Marcelo Schmidt</title>
+    <meta name="description" content="Original recordings by Marcelo Schmidt — home studio songs recorded on Tascam porta studios.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --panel: rgba(8, 8, 8, 0.78);
+            --border: rgba(255, 255, 255, 0.09);
+            --text: #f3f3f3;
+            --muted: rgba(255, 255, 255, 0.72);
+            --dim: rgba(255, 255, 255, 0.5);
+            --accent: #e7d7a2;
+            --accent-soft: rgba(231, 215, 162, 0.18);
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { min-height: 100%; }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            background-image:
+                linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.58) 34%, rgba(0, 0, 0, 0.26) 58%, rgba(0, 0, 0, 0.74) 100%),
+                linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.42) 100%),
+                url('media/music/bg-guitar.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .page {
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        .shell {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 320px minmax(0, 1fr);
+            gap: 2rem;
+            align-items: start;
+        }
+        .sidebar {
+            padding-top: 1rem;
+        }
+        .home-link {
+            display: inline-block;
+            margin-bottom: 1.25rem;
+            color: var(--dim);
+            text-decoration: none;
+            font-size: 0.92rem;
+            letter-spacing: 0.04em;
+        }
+        .home-link:hover { color: var(--accent); }
+        .title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 5vw, 4.25rem);
+            line-height: 0.95;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: var(--muted);
+            max-width: 260px;
+            margin-bottom: 2rem;
+            font-size: 0.98rem;
+        }
+        .track-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+        .track-button {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            color: var(--muted);
+            text-align: left;
+            padding: 0.7rem 0.85rem;
+            border-left: 2px solid transparent;
+            font-size: 0.98rem;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+        }
+        .track-button:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(2px);
+        }
+        .track-button.active {
+            color: var(--accent);
+            background: var(--accent-soft);
+            border-color: var(--accent);
+        }
+        .panel-wrap {
+            min-height: 560px;
+            padding-top: 6rem;
+        }
+        .panel {
+            display: none;
+            max-width: 760px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(14px);
+            padding: 1.6rem 1.7rem 1.8rem;
+        }
+        .panel.active { display: block; }
+        .panel-label {
+            font-size: 0.74rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+        .panel h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        .panel p {
+            color: var(--muted);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        .panel p:last-child { margin-bottom: 0; }
+        .panel a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .panel a:hover { text-decoration: underline; }
+        audio {
+            width: 100%;
+            margin: 1rem 0 1.2rem;
+            filter: saturate(0.92) brightness(0.96);
+        }
+        .quote-block {
+            margin: 1rem 0 1.2rem;
+            padding: 1rem 1.1rem;
+            border-left: 3px solid var(--accent);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 0 14px 14px 0;
+        }
+        .quote-block p {
+            color: #e7e7e7;
+            font-size: 0.96rem;
+        }
+        .gear {
+            color: var(--dim);
+            font-size: 0.95rem;
+        }
+        .mobile-note {
+            display: none;
+            color: var(--dim);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 900px) {
+            body { background-attachment: scroll; }
+            .page { padding: 1rem; }
+            .shell {
+                grid-template-columns: 1fr;

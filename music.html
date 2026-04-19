@@ -1,281 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music — Marcelo Schmidt</title>
-    <meta name="description" content="Original recordings by Marcelo Schmidt — home studio songs recorded on Tascam porta studios.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #0c0c0c;
-            --bg-card: #161616;
-            --bg-card-hover: #1c1c1c;
-            --text: #e8e8e8;
-            --text-muted: #888;
-            --text-dim: #555;
-            --accent: #4ecdc4;
-            --accent-secondary: #ff6b6b;
-            --border: #222;
-            --gradient-1: linear-gradient(135deg, #4ecdc4 0%, #44b8a8 100%);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-        }
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 100;
-            background: rgba(12, 12, 12, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
-        }
-        nav .nav-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        nav .logo {
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 0.08em;
-            color: var(--accent);
-            text-decoration: none;
-        }
-        nav .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 2rem;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.03em;
-            transition: color 0.2s;
-        }
-        nav .nav-links a:hover, nav .nav-links a.active { color: var(--accent); }
-        main {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 8rem 2rem 4rem;
-        }
-        .hero {
-            margin-bottom: 4rem;
-            position: relative;
-        }
-        .hero::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background:
-                radial-gradient(ellipse at 20% 20%, rgba(78,205,196,0.06) 0%, transparent 55%),
-                radial-gradient(ellipse at 80% 15%, rgba(255,107,107,0.04) 0%, transparent 45%);
-            pointer-events: none;
-            z-index: -1;
-        }
-        .section-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-        h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            line-height: 1.1;
-            letter-spacing: -0.04em;
-            margin-bottom: 1.5rem;
-        }
-        h1 .highlight {
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .intro {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 760px;
-            margin-bottom: 2rem;
-        }
-        .bio-card, .track-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            transition: background 0.2s, transform 0.2s;
-        }
-        .track-card:hover {
-            background: var(--bg-card-hover);
-            transform: translateY(-2px);
-        }
-        .bio-card h2, .track-card h2 {
-            font-size: 1.45rem;
-            margin-bottom: 0.85rem;
-        }
-        .track-card h2 span {
-            color: var(--accent);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            font-weight: 400;
-            margin-right: 0.75rem;
-        }
-        p {
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-        p:last-child { margin-bottom: 0; }
-        audio {
-            width: 100%;
-            margin: 1rem 0 1.25rem;
-            accent-color: var(--accent);
-        }
-        .note {
-            color: var(--text-dim);
-            font-size: 0.9rem;
-        }
-        .lyrics {
-            border-left: 3px solid var(--accent-secondary);
-            padding-left: 1rem;
-            margin: 1rem 0;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 1rem;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .back-link:hover { text-decoration: underline; }
-        footer {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 2rem 3rem;
-            color: var(--text-dim);
-            font-size: 0.9rem;
-        }
-        @media (max-width: 700px) {
-            nav { padding: 1rem; }
-            nav .nav-links a { margin-left: 1rem; font-size: 0.8rem; }
-            main { padding: 7rem 1rem 3rem; }
-            .bio-card, .track-card { padding: 1.25rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music — Marcelo Schmidt</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#f4f4f4;background:linear-gradient(90deg,rgba(0,0,0,.86),rgba(0,0,0,.55) 38%,rgba(0,0,0,.25) 62%,rgba(0,0,0,.78)),url('media/music/bg-guitar.jpg') center/cover fixed no-repeat;line-height:1.65}
+.page{min-height:100vh;padding:32px}
+.layout{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:310px 1fr;gap:42px}
+.side{padding-top:20px}
+.back{color:rgba(255,255,255,.48);text-decoration:none;font-size:14px}
+.back:hover{color:#e6d39c}
+h1{font-family:Georgia,serif;font-size:64px;line-height:.92;margin:22px 0 10px;font-weight:500}
+.sub{color:rgba(255,255,255,.72);margin-bottom:28px;max-width:270px}
+.list{list-style:none}
+.list button{width:100%;background:transparent;border:0;border-left:2px solid transparent;color:rgba(255,255,255,.75);text-align:left;padding:11px 12px;font-size:16px;cursor:pointer}
+.list button:hover,.list button.active{color:#e6d39c;background:rgba(230,211,156,.14);border-left-color:#e6d39c}
+.content{padding-top:100px}
+.panel{display:none;max-width:760px;background:rgba(8,8,8,.82);border:1px solid rgba(255,255,255,.1);border-radius:22px;box-shadow:0 24px 70px rgba(0,0,0,.45);backdrop-filter:blur(14px);padding:28px}
+.panel.active{display:block}
+.label{color:#e6d39c;text-transform:uppercase;letter-spacing:.16em;font-size:12px;margin-bottom:10px}
+.panel h2{font-family:Georgia,serif;font-size:42px;line-height:1;margin-bottom:14px;font-weight:500}
+.panel p{color:rgba(255,255,255,.74);margin-bottom:16px}
+.panel a{color:#e6d39c}
+audio{width:100%;margin:12px 0 18px}
+.quote{border-left:3px solid #e6d39c;background:rgba(255,255,255,.04);padding:14px 16px;margin:16px 0;border-radius:0 12px 12px 0}
+.gear{color:rgba(255,255,255,.55);font-size:14px}
+@media(max-width:850px){body{background-attachment:scroll}.page{padding:16px}.layout{grid-template-columns:1fr;gap:20px}.side{background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:18px}h1{font-size:48px}.sub{max-width:none}.content{padding-top:0}.panel{padding:20px}.panel h2{font-size:34px}}
+</style>
 </head>
 <body>
-<nav>
-    <div class="nav-inner">
-        <a class="logo" href="index.html">MS</a>
-        <div class="nav-links">
-            <a href="index.html#about">About</a>
-            <a href="index.html#interests">Interests</a>
-            <a href="index.html#career">Career</a>
-            <a href="index.html#community">Community</a>
-            <a href="music.html" class="active">Music</a>
-        </div>
-    </div>
-</nav>
+<div class="page"><div class="layout">
+<aside class="side">
+<a class="back" href="index.html">← Back to main site</a>
+<h1>Diazepam</h1>
+<p class="sub">Home studio recordings — all instruments, one guy.</p>
+<ul class="list">
+<li><button onclick="show('riff')" id="btn-riff">Riff Raff</button></li>
+<li><button onclick="show('dream')" id="btn-dream">Dreamer</button></li>
+<li><button onclick="show('simon')" id="btn-simon">Simon</button></li>
+<li><button onclick="show('hello')" id="btn-hello">Hello</button></li>
+<li><button onclick="show('picca')" id="btn-picca">Piccadilly is a Circus</button></li>
+<li><button onclick="show('biggs')" id="btn-biggs">Bigg's Song</button></li>
+<li><button onclick="show('ba')" id="btn-ba">Buenos Aires</button></li>
+<li><button onclick="show('amanda')" id="btn-amanda">Amanda</button></li>
+<li><button onclick="show('bio')" id="btn-bio">Bio</button></li>
+</ul>
+</aside>
+<main class="content">
+<div class="panel" id="riff">
+<div class="label">Track 01</div>
+<h2>Riff Raff</h2>
+<audio controls preload="none" src="media/music/RIFFMIX4_AUDITION4.mp3"></audio>
+<p>This was one of the first songs I recorded — a simple rock & roll track with an AC/DC-style intro. It was also one of my first real experiments with the Boss Loop Station (RC-2) and the Line 6 BackTrack working together, layering guitars while the drum beat and second guitar kept repeating.</p>
+<p>The bass lines and synthesizer were recorded with the microKorg in-line, and the lead guitar was recorded from air into a Tascam DP-004.</p>
+</div>
 
-<main>
-    <section class="hero">
-        <div class="section-label">05 — Music</div>
-        <h1>Home studio songs,<br><span class="highlight">one guy, all the instruments.</span></h1>
-        <p class="intro">
-            Before tech took over my life, music got there first. I started on piano at six, picked up guitar in my early teens,
-            trained as a classical baritone, sang opera at Teatro Colón, then moved through R&amp;B and rock bands before life,
-            work, and college got in the way. Years later I came back to it, turned my home office into a little studio, and
-            started recording songs on Tascam porta studios — guitars, bass, keys, vocals, drums, all layered one track at a time.
-        </p>
-    </section>
+<div class="panel" id="dream">
+<div class="label">Track 02</div>
+<h2>Dreamer</h2>
+<audio controls preload="none" src="media/music/DREAMMIX_AUDITION01.mp3"></audio>
+<p>I created this song right after getting my Strat in 2009. Those clean single-coil pickups practically forced these chords out of me. The progression has a floating, wave-like feel, with a soft melody that comes and goes.</p>
+<p>The inspiration was Tommy Bolin's "Dreamer" — and the funny part is we both played the exact same guitar.</p>
+</div>
 
-    <section class="bio-card">
-        <h2>Diazepam bio & intro</h2>
-        <p>I grew up in Buenos Aires, Argentina and moved definitively to the US in 1999. I played piano since I was 6 and in my early teens guitar. I never took a single class of either instrument. However, at 15 I started singing classical as a baritone. I sang classical music and studied opera at the Teatro Colón in Argentina. At the age of 22 I quit singing opera, but I was already singing in R&amp;B bands for a few years. That became the perfect opportunity to get more involved with bands, and I started singing in Rock &amp; Roll bands until the age of 25.</p>
-        <p>But with college studies and work I couldn’t keep up with rehearsals and stopped playing music for many years. A couple of years later I decided to come back and transformed my home office into a studio/rehearsal paradise.</p>
-        <p>I played all the instruments and everything here was recorded on Tascam porta studios. I can also play these songs live with a simple playback track where I perform the guitar and vocal leads. That gives me the perfect setup to play any time I want without the headaches of other people’s schedules. Yes, it would be nice to have a real band, but for now this gets me going — and I hope you enjoy it too.</p>
-        <p><strong>Gear:</strong> Strat and 6-string acoustic Fender, backup Epiphone Les Paul, Yamaha RBX170 bass, Boss pedals, Dunlop Hendrix wah, Ernie Ball volume pedals, Tascam DP-004 and DP-008, Yamaha YDP, microKorg, Fender Twin 65, Peavey 112 Bass, Alesis SR-16, EV Cobalt mic, Phonic 410 PA, Digitech Vocalist 2, Line 6 BackTrack / Micro Spider / XDS95.</p>
-    </section>
+<div class="panel" id="simon">
+<div class="label">Track 03</div>
+<h2>Simon</h2>
+<audio controls preload="none" src="media/music/SIMONMIX_AUDITION01.mp3"></audio>
+<p>This one started as a joke. I bought a Strat for my son and, while testing it, came up with these riffs as a simple baseline to practice. I ended up using it so often as a warm-up that I decided it deserved a full song.</p>
+<p>This could easily be a Satriani-style backing track. And yes, the harmonizer is absolutely being abused here, but that's half the fun.</p>
+</div>
 
-    <section class="track-card">
-        <h2><span>01</span>Riff Raff</h2>
-        <audio controls preload="none" src="media/music/RIFFMIX4_AUDITION4.mp3"></audio>
-        <p>This was one of the first songs I recorded — a simple rock &amp; roll track with an AC/DC-style intro. It was also one of my first real experiments with the Boss Loop Station (RC-2) and the Line 6 BackTrack working together, layering guitars while the drum beat and second guitar kept repeating.</p>
-        <p>The bass lines and synthesizer were recorded with the microKorg in-line, and the lead guitar was recorded from air into a Tascam DP-004. Primitive setup, but it taught me how to build a full arrangement out of loops and overdubs.</p>
-    </section>
+<div class="panel" id="hello">
+<div class="label">Track 04</div>
+<h2>Hello</h2>
+<audio controls preload="none" src="media/music/HELLOMIX_AUDITION01.mp3"></audio>
+<p>I borrowed the base arpeggios from a YouTube guitar version of Evanescence's "Hello," then modified the chords enough that it became my own version.</p>
+<p>Hello ended up with around 12 tracks, which means I had to bounce tracks repeatedly on the tiny DP-004. That was around the time I realized I needed a real bass and more recording space.</p>
+</div>
 
-    <section class="track-card">
-        <h2><span>02</span>Dreamer</h2>
-        <audio controls preload="none" src="media/music/DREAMMIX_AUDITION01.mp3"></audio>
-        <p>I created this song right after getting my Strat in 2009. Those clean single-coil pickups practically forced these chords out of me. The progression has a floating, wave-like feel, with a soft melody that comes and goes, a jazzy clean-guitar solo in the first part, then a more emotional distorted solo later on.</p>
-        <p>At the end, the lead guitar drops into shifted-down octaves to create that unison dual guitar/bass sound. The inspiration was Tommy Bolin’s “Dreamer” — and the funny part is we both played the exact same guitar.</p>
-    </section>
+<div class="panel" id="picca">
+<div class="label">Track 05</div>
+<h2>Piccadilly is a Circus</h2>
+<audio controls preload="none" src="media/music/PICCAMIX_AUDITION01.mp3"></audio>
+<p>The voice at the beginning is my 5-year-old, and for some reason I decided that was the right moment to add lyrics and sing a few lines. I started working on this after coming back from London, where I had a chance to see my great old friend Jorge "George" C. — an incredible guitarist from our Buenos Aires rock-band days in the 90s.</p>
+<p>This song is dedicated to him. I believe it was one of the last songs where I used the RC-2, with two different loops switching back and forth.</p>
+</div>
 
-    <section class="track-card">
-        <h2><span>03</span>Simon</h2>
-        <audio controls preload="none" src="media/music/SIMONMIX_AUDITION01.mp3"></audio>
-        <p>This one started as a joke. I bought a Strat for my son and, while testing it, came up with these riffs as a simple baseline to practice. I ended up using it so often as a warm-up that I decided it deserved a full song. Then came the microKorg, more guitars, and the DP-004.</p>
-        <p>This could easily be a Satriani-style backing track. I really enjoy how flexible the soloing feels on this one — every time I play it, I change something. And yes, the harmonizer is absolutely being abused here, but that’s half the fun.</p>
-    </section>
+<div class="panel" id="biggs">
+<div class="label">Track 06</div>
+<h2>Bigg's Song</h2>
+<audio controls preload="none" src="media/music/BIGGSMIX_AUDITION01.mp3"></audio>
+<p>This was a hard one. I wrote it in memory of troubled teens, using lyrics adapted from the blog posts of a South Florida teenager who died from a drug overdose in front of a live webcam audience.</p>
+<div class="quote">
+<p>"What hurts the most was being so close / And having so much to say / And watchin' you walk away..."</p>
+</div>
+<p>I cut and reshaped some phrases to make them fit the music, but the point was the same: grief, regret, and the weight people carry when no one sees it.</p>
+</div>
 
-    <section class="track-card">
-        <h2><span>04</span>Hello</h2>
-        <audio controls preload="none" src="media/music/HELLOMIX_AUDITION01.mp3"></audio>
-        <p>I borrowed the base arpeggios from a YouTube guitar version of Evanescence’s “Hello,” then modified the chords enough that it became my own version. Around May 2009 I was still using the microKorg for bass lines and the RC-2 for drums and overdubbing, but this song pushed the setup to its limit.</p>
-        <p>Hello ended up with around 12 tracks, which means I had to bounce tracks repeatedly on the tiny DP-004. That was around the time I realized I needed a real bass and more recording space.</p>
-    </section>
+<div class="panel" id="ba">
+<div class="label">Track 07</div>
+<h2>Buenos Aires</h2>
+<audio controls preload="none" src="media/music/BAMIX.mp3"></audio>
+<p>After coming back from Buenos Aires in April 2010, I started working on this song. By this point the bass was a real Fender Precision, and the drums were programmed on the Alesis. I used a lot of harmonizer and layered guitars across this 8+ minute piece.</p>
+<p>I was trying to capture a gray city — all concrete and buildings, streets going dim after 5 p.m. — but still with the charm that makes Buenos Aires feel like its own kind of European city.</p>
+</div>
 
-    <section class="track-card">
-        <h2><span>05</span>Piccadilly is a Circus</h2>
-        <audio controls preload="none" src="media/music/PICCAMIX_AUDITION01.mp3"></audio>
-        <p>The voice at the beginning is my 5-year-old, and for some reason I decided that was the right moment to add lyrics and sing a few lines. So be it. I started working on this after coming back from London, where I had a chance to see my great old friend Jorge “George” C. — an incredible guitarist and a huge inspiration from our Buenos Aires rock-band days in the 90s.</p>
-        <p>This song is dedicated to him. I believe it was one of the last songs where I used the RC-2, with two different loops switching back and forth. From here on, I stopped using the microKorg as bass and moved to a real Fender Precision and the Yamaha bass setup.</p>
-    </section>
+<div class="panel" id="amanda">
+<div class="label">Track 08</div>
+<h2>Amanda</h2>
+<audio controls preload="none" src="media/music/AMANDMIX.mp3"></audio>
+<p>"Amanda" is Boston's song from Third Stage (1986), but this is my own version. I used a 6-string acoustic with flanger and chorus to compensate for not owning Tom Scholz's kind of 12-string texture.</p>
+<p>My original version used the Digitech Vocalist 2 to create the chorus. But when I recorded the voice, it sounded awful. My friend Jorge told me to kill the effect and just overdub the vocals properly — so I did.</p>
+</div>
 
-    <section class="track-card">
-        <h2><span>06</span>Bigg's Song (In Memory of Candy Junkie)</h2>
-        <audio controls preload="none" src="media/music/BIGGSMIX_AUDITION01.mp3"></audio>
-        <p>This was a hard one. I wrote it in memory of troubled teens, using lyrics adapted from the blog/forum posts of a South Florida teenager who died from a lethal drug overdose in front of a live webcam audience after blogging about his plan.</p>
-        <div class="lyrics">
-            <p class="note">Selected adapted lines used in the song:</p>
-            <p>“What hurts the most was being so close / And having so much to say / And watchin’ you walk away...”</p>
-            <p>“It’s hard to deal with the pain of losing you everywhere I go...”</p>
-            <p>“I’m not afraid to cry / Every once in a while...”</p>
-        </div>
-        <p>I cut and reshaped some phrases to make them fit the music, but the point was the same: grief, regret, and the weight people carry when no one sees it. The original forum thread was on Bodybuilding.com.</p>
-    </section>
+<div class="panel" id="bio">
+<div class="label">About</div>
+<h2>Bio</h2>
+<p>I grew up in Buenos Aires, Argentina and moved to the US in 1999. I played piano since I was 6 and guitar in my early teens. Never took a single class of either instrument. At 15 I started singing classical as a baritone, studying opera at the Teatro Colón. At 22 I quit opera but was already singing in R&B bands. Then came Rock & Roll bands until 25.</p>
+<p>College and work got in the way, and I stopped playing for many years. Eventually I came back and transformed my home office into a studio. I played all the instruments and recorded everything on Tascam porta studios.</p>
+<p class="gear"><strong>Gear:</strong> Fender Strat, 6-string acoustic, Epiphone Les Paul, Yamaha RBX170 bass, Boss pedals (MT-2, CH-1, BF-3, PS-5, DD-6, RC-2), Dunlop Hendrix wah, Tascam DP-004 & DP-008, Yamaha YDP, microKorg, Fender Twin 65, Peavey 112 Bass, Alesis SR-16, EV Cobalt mic, Digitech Vocalist 2, Line 6 BackTrack.</p>
+</div>
 
-    <section class="track-card">
-        <h2><span>07</span>Buenos Aires</h2>
-        <audio controls preload="none" src="media/music/BAMIX.mp3"></audio>
-        <p>After coming back from Buenos Aires in April 2010, I started working on this song. By this point the bass was a real Fender Precision, and the drums were programmed on the Alesis instead of coming from the RC-2. I used a lot of harmonizer and layered guitars across this 8+ minute piece.</p>
-        <p>From the first notes to the final recording, I probably spent at least four months on it. It blends two main melodies: one distorted and one riding above it with harmonizer. I was trying to capture a gray city — all concrete and buildings, streets going dim after 5 p.m. — but still with the charm and density that makes Buenos Aires feel like its own kind of European city.</p>
-        <p>The guitars and Alesis were recorded in stereo directly into the DP-008. And finally, I found a few places where I could justify using the wah-wah.</p>
-    </section>
-
-    <section class="track-card">
-        <h2><span>08</span>Amanda</h2>
-        <audio controls preload="none" src="media/music/AMANDMIX.mp3"></audio>
-        <p>After months of work, I finally finished this one. “Amanda” is, of course, Boston’s song from <em>Third Stage</em> (1986), but this is my own version. I used a 6-string acoustic with flanger and chorus to compensate for not owning Tom Scholz’s kind of 12-string texture, played Yamaha bass directly into the DP-008, skipped keyboards entirely, and let the lead guitar handle the harmonization duties.</p>
-        <p>My original version used the Digitech Vocalist 2 to create the chorus, and it actually worked pretty well live. But when I recorded the voice, it sounded awful. I sent the demo to my friend Jorge “George,” and he told me to kill the effect and just overdub the vocals properly — so I did.</p>
-    </section>
-
-    <a class="back-link" href="index.html">← Back to main site</a>
 </main>
-
-<footer>
-    <p>© 2026 Marcelo Schmidt — Cascais, Portugal 🇵🇹</p>
-</footer>
+</div></div>
+<script>
+function show(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.list button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('btn-' + id).classList.add('active');
+}
+show('riff');
+</script>
 </body>
 </html>
