@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deutsch Flashcards — Marcelo Schmidt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #0f1412;
+    --panel: #172019;
+    --panel-2: #1f2b22;
+    --text: #edf3ee;
+    --muted: #a2b0a4;
+    --accent: #8fd694;
+    --accent-2: #d8f3b0;
+    --border: rgba(255,255,255,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at top left, rgba(143,214,148,0.14), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(216,243,176,0.1), transparent 30%),
+        linear-gradient(180deg, #0d120f 0%, #111913 100%);
+    min-height: 100vh;
+    line-height: 1.7;
+}
+.main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 32px 20px 72px;
+}
+.back {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 28px;
+}
+.back:hover { color: var(--accent-2); }
+.hero {
+    background: rgba(23,32,25,0.8);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.28);
+    margin-bottom: 28px;
+}
+.eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+h1 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 1;
+    margin-bottom: 16px;
+}
+.lead {
+    max-width: 700px;
+    color: var(--muted);
+    font-size: 1.06rem;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.9fr;
+    gap: 24px;
+    margin-top: 24px;
+}
+.card {
+    background: rgba(23,32,25,0.82);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+}
+.card h2 {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+}
+.card p, .card li {
+    color: var(--muted);
+    font-size: 0.96rem;
+}
+.card ul {
+    padding-left: 18px;
+}
+.actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary {
+    background: var(--accent);
+    color: #0d120f;
+}
+.btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+.btn-secondary:hover {
+    border-color: rgba(143,214,148,0.45);
+    background: rgba(143,214,148,0.08);
+}
+.kicker {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent-2);
+    margin-bottom: 10px;
+}
+.note {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: rgba(216,243,176,0.08);
+    color: var(--muted);
+}
+footer {
+    margin-top: 36px;
+    color: #7f8c81;
+    font-size: 0.88rem;
+}
+@media (max-width: 760px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    .hero, .card {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="main">
+    <a class="back" href="../../index.html">← Back to main site</a>
+
+    <section class="hero">
+        <div class="eyebrow">Deutsch</div>
+        <h1>German flashcards</h1>
+        <p class="lead">
+            A small study corner for my German practice. This page tracks the tools I am using right now: Duolingo for daily reps and Anki for flashcard review.
+        </p>
+        <div class="actions">
+            <a class="btn btn-primary" href="Germanwithsammy-Module-1.apkg">Download Module 1</a>
+            <a class="btn btn-primary" href="Germanwithsammy-Module-2.apkg">Download Module 2</a>
+            <a class="btn btn-primary" href="Germanwithsammy-Module-3.apkg">Download Module 3</a>
+            <a class="btn btn-primary" href="Germanwithsammy-Module-4.apkg">Download Module 4</a>
+            <a class="btn btn-primary" href="Germanwithsammy-Module-5.apkg">Download Module 5</a>
+            <a class="btn btn-primary" href="Germanwithsammy-Module-6.apkg">Download Module 6</a>
+            <a class="btn btn-primary" href="Germanwithsammy-Module-7.apkg">Download Module 7</a>
+            <a class="btn btn-primary" href="Germanwithsammy-Module-8.apkg">Download Module 8</a>
+            <a class="btn btn-primary" href="Germanwithsammy-Module-9.apkg">Download Module 9</a>
+            <a class="btn btn-secondary" href="README.txt">Read instructions</a>
+        </div>
+    </section>
+
+    <section class="grid">
+        <article class="card">
+            <div class="kicker">Current status</div>
+            <h2>Duolingo profile</h2>
+            <p>
+                Current Duolingo handle: <strong>@marcelo357926</strong>.
+            </p>
+            <p>
+                Public profile: <a href="https://www.duolingo.com/u/marcelo357926" target="_blank" rel="noopener noreferrer">duolingo.com/u/marcelo357926</a>
+            </p>
+            <p>
+                I am using Duolingo as the daily practice layer and Anki as the retention layer for German vocabulary and review.
+            </p>
+            <div class="note">
+                Current overview: 443-day streak, German level 51, Diamond league, and 184,833 XP.
+            </div>
+        </article>
+
+        <aside class="card">
+            <div class="kicker">Flashcard library</div>
+            <h2>Anki deck files</h2>
+            <ul>
+                <li><a href="Germanwithsammy-Module-1.apkg">Germanwithsammy-Module-1.apkg</a></li>
+                <li><a href="Germanwithsammy-Module-2.apkg">Germanwithsammy-Module-2.apkg</a></li>
+                <li><a href="Germanwithsammy-Module-3.apkg">Germanwithsammy-Module-3.apkg</a></li>
+                <li><a href="Germanwithsammy-Module-4.apkg">Germanwithsammy-Module-4.apkg</a></li>
+                <li><a href="Germanwithsammy-Module-5.apkg">Germanwithsammy-Module-5.apkg</a></li>
+                <li><a href="Germanwithsammy-Module-6.apkg">Germanwithsammy-Module-6.apkg</a></li>
+                <li><a href="Germanwithsammy-Module-7.apkg">Germanwithsammy-Module-7.apkg</a></li>
+                <li><a href="Germanwithsammy-Module-8.apkg">Germanwithsammy-Module-8.apkg</a></li>
+                <li><a href="Germanwithsammy-Module-9.apkg">Germanwithsammy-Module-9.apkg</a></li>
+                <li><a href="README.txt">README.txt</a></li>
+            </ul>
+        </aside>
+    </section>
+
+    <section class="card" style="margin-top: 24px;">
+        <div class="kicker">How I use it</div>
+        <h2>Study workflow</h2>
+        <ul>
+            <li>Use Duolingo for daily consistency and short practice sessions.</li>
+            <li>Download the `.apkg` files from this page.</li>
+            <li>Import the decks into Anki on Mac or PC.</li>
+            <li>Use Anki for deeper review and long-term retention.</li>
+        </ul>
+    </section>
+
+    <footer>
+        © 2026 Marcelo Schmidt — Deutsch / flashcards
+    </footer>
+</div>
+</body>
+</html>
