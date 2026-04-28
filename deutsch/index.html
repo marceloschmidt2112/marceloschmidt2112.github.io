@@ -3,35 +3,224 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="refresh" content="0; url=./flashcards/">
 <title>Deutsch — Marcelo Schmidt</title>
-<link rel="canonical" href="./flashcards/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
+:root {
+    --bg: #0f1412;
+    --panel: #172019;
+    --text: #edf3ee;
+    --muted: #a2b0a4;
+    --accent: #8fd694;
+    --accent-2: #d8f3b0;
+    --border: rgba(255,255,255,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #0f1412;
-    color: #edf3ee;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at top left, rgba(143,214,148,0.14), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(216,243,176,0.1), transparent 30%),
+        linear-gradient(180deg, #0d120f 0%, #111913 100%);
     min-height: 100vh;
-    margin: 0;
+    line-height: 1.7;
+}
+.main {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 32px 20px 72px;
+}
+.back {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 28px;
+}
+.back:hover { color: var(--accent-2); }
+.hero, .card {
+    background: rgba(23,32,25,0.82);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.28);
+}
+.hero { margin-bottom: 24px; }
+.eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+h1 {
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    line-height: 1;
+    margin-bottom: 16px;
+}
+.lead {
+    max-width: 760px;
+    color: var(--muted);
+    font-size: 1.06rem;
+}
+.actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary {
+    background: var(--accent);
+    color: #0d120f;
+}
+.btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+.btn-secondary:hover {
+    border-color: rgba(143,214,148,0.45);
+    background: rgba(143,214,148,0.08);
+}
+.grid {
     display: grid;
-    place-items: center;
-    padding: 24px;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 24px;
 }
-.card {
-    max-width: 640px;
-    background: #172019;
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 18px;
-    padding: 28px;
+.card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
 }
-a { color: #8fd694; }
+.card p, .card li {
+    color: var(--muted);
+    font-size: 0.96rem;
+}
+.kicker {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent-2);
+    margin-bottom: 10px;
+}
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+}
+.stat {
+    background: rgba(216,243,176,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 16px;
+}
+.stat-value {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text);
+}
+.stat-label {
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+.note {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: rgba(216,243,176,0.08);
+    color: var(--muted);
+}
+footer {
+    margin-top: 36px;
+    color: #7f8c81;
+    font-size: 0.88rem;
+}
+@media (max-width: 760px) {
+    .grid, .stats { grid-template-columns: 1fr; }
+    .hero, .card { padding: 20px; }
+}
 </style>
 </head>
 <body>
-    <div class="card">
-        <h1>Deutsch</h1>
-        <p>Redirecting to the flashcards page.</p>
-        <p>If you are not redirected, <a href="./flashcards/">open the Deutsch flashcards section</a>.</p>
-    </div>
+<div class="main">
+    <a class="back" href="../index.html">← Back to main site</a>
+
+    <section class="hero">
+        <div class="eyebrow">Deutsch</div>
+        <h1>German learning</h1>
+        <p class="lead">
+            German is one of the languages I keep actively working on. Duolingo gives me the daily rhythm. Anki gives me the long-term retention. This section is the current snapshot of that process.
+        </p>
+        <div class="actions">
+            <a class="btn btn-primary" href="./flashcards/">Open flashcards library</a>
+            <a class="btn btn-secondary" href="https://www.duolingo.com/u/marcelo357926" target="_blank" rel="noopener noreferrer">View Duolingo profile</a>
+        </div>
+    </section>
+
+    <section class="grid">
+        <article class="card">
+            <div class="kicker">Status</div>
+            <h2>Current Duolingo profile</h2>
+            <p>
+                Duolingo handle: <strong>@marcelo357926</strong>
+            </p>
+            <p>
+                Duolingo is the daily practice layer. Anki is the review layer where vocabulary sticks.
+            </p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">443</div>
+                    <div class="stat-label">Day streak</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">51</div>
+                    <div class="stat-label">German level</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">Diamond</div>
+                    <div class="stat-label">League</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">184,833</div>
+                    <div class="stat-label">XP</div>
+                </div>
+            </div>
+        </article>
+
+        <aside class="card">
+            <div class="kicker">Flashcards</div>
+            <h2>Anki deck library</h2>
+            <p>
+                I keep the downloadable Anki packages in a separate section so the study materials stay organized and easy to import.
+            </p>
+            <div class="note">
+                The full set includes 9 `.apkg` packages, plus the original readme.
+            </div>
+            <div class="actions">
+                <a class="btn btn-primary" href="./flashcards/">Go to flashcards</a>
+            </div>
+        </aside>
+    </section>
+
+    <footer>
+        © 2026 Marcelo Schmidt — Deutsch
+    </footer>
+</div>
 </body>
 </html>

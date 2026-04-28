@@ -11,7 +11,6 @@
 :root {
     --bg: #0f1412;
     --panel: #172019;
-    --panel-2: #1f2b22;
     --text: #edf3ee;
     --muted: #a2b0a4;
     --accent: #8fd694;
@@ -41,14 +40,14 @@ body {
     margin-bottom: 28px;
 }
 .back:hover { color: var(--accent-2); }
-.hero {
-    background: rgba(23,32,25,0.8);
+.hero, .card {
+    background: rgba(23,32,25,0.82);
     border: 1px solid var(--border);
     border-radius: 24px;
     padding: 32px;
     box-shadow: 0 24px 60px rgba(0,0,0,0.28);
-    margin-bottom: 28px;
 }
+.hero { margin-bottom: 24px; }
 .eyebrow {
     font-family: 'JetBrains Mono', monospace;
     color: var(--accent);
@@ -63,32 +62,9 @@ h1 {
     margin-bottom: 16px;
 }
 .lead {
-    max-width: 700px;
+    max-width: 720px;
     color: var(--muted);
     font-size: 1.06rem;
-}
-.grid {
-    display: grid;
-    grid-template-columns: 1.3fr 0.9fr;
-    gap: 24px;
-    margin-top: 24px;
-}
-.card {
-    background: rgba(23,32,25,0.82);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 24px;
-}
-.card h2 {
-    font-size: 1.15rem;
-    margin-bottom: 12px;
-}
-.card p, .card li {
-    color: var(--muted);
-    font-size: 0.96rem;
-}
-.card ul {
-    padding-left: 18px;
 }
 .actions {
     display: flex;
@@ -120,6 +96,20 @@ h1 {
     border-color: rgba(143,214,148,0.45);
     background: rgba(143,214,148,0.08);
 }
+.grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 24px;
+}
+.card h2 {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+}
+.card p, .card li {
+    color: var(--muted);
+    font-size: 0.96rem;
+}
+.card ul { padding-left: 18px; }
 .kicker {
     display: inline-block;
     font-family: 'JetBrains Mono', monospace;
@@ -140,60 +130,50 @@ footer {
     font-size: 0.88rem;
 }
 @media (max-width: 760px) {
-    .grid {
-        grid-template-columns: 1fr;
-    }
-    .hero, .card {
-        padding: 20px;
-    }
+    .grid { grid-template-columns: 1fr; }
+    .hero, .card { padding: 20px; }
 }
 </style>
 </head>
 <body>
 <div class="main">
-    <a class="back" href="../../index.html">← Back to main site</a>
+    <a class="back" href="../index.html">← Back to Deutsch</a>
 
     <section class="hero">
-        <div class="eyebrow">Deutsch</div>
+        <div class="eyebrow">Deutsch / Flashcards</div>
         <h1>German flashcards</h1>
         <p class="lead">
-            A small study corner for my German practice. This page tracks the tools I am using right now: Duolingo for daily reps and Anki for flashcard review.
+            Downloadable Anki decks for German study. These are kept as original `.apkg` packages for direct import into Anki.
         </p>
         <div class="actions">
-            <a class="btn btn-primary" href="Germanwithsammy-Module-1.apkg">Download Module 1</a>
-            <a class="btn btn-primary" href="Germanwithsammy-Module-2.apkg">Download Module 2</a>
-            <a class="btn btn-primary" href="Germanwithsammy-Module-3.apkg">Download Module 3</a>
-            <a class="btn btn-primary" href="Germanwithsammy-Module-4.apkg">Download Module 4</a>
-            <a class="btn btn-primary" href="Germanwithsammy-Module-5.apkg">Download Module 5</a>
-            <a class="btn btn-primary" href="Germanwithsammy-Module-6.apkg">Download Module 6</a>
-            <a class="btn btn-primary" href="Germanwithsammy-Module-7.apkg">Download Module 7</a>
-            <a class="btn btn-primary" href="Germanwithsammy-Module-8.apkg">Download Module 8</a>
-            <a class="btn btn-primary" href="Germanwithsammy-Module-9.apkg">Download Module 9</a>
+            <a class="btn btn-secondary" href="../index.html">Back to Deutsch landing page</a>
             <a class="btn btn-secondary" href="README.txt">Read instructions</a>
         </div>
     </section>
 
     <section class="grid">
         <article class="card">
-            <div class="kicker">Current status</div>
-            <h2>Duolingo profile</h2>
-            <p>
-                Current Duolingo handle: <strong>@marcelo357926</strong>.
-            </p>
-            <p>
-                Public profile: <a href="https://www.duolingo.com/u/marcelo357926" target="_blank" rel="noopener noreferrer">duolingo.com/u/marcelo357926</a>
-            </p>
-            <p>
-                I am using Duolingo as the daily practice layer and Anki as the retention layer for German vocabulary and review.
-            </p>
+            <div class="kicker">Downloads</div>
+            <h2>Anki packages</h2>
+            <div class="actions">
+                <a class="btn btn-primary" href="Germanwithsammy-Module-1.apkg">Module 1</a>
+                <a class="btn btn-primary" href="Germanwithsammy-Module-2.apkg">Module 2</a>
+                <a class="btn btn-primary" href="Germanwithsammy-Module-3.apkg">Module 3</a>
+                <a class="btn btn-primary" href="Germanwithsammy-Module-4.apkg">Module 4</a>
+                <a class="btn btn-primary" href="Germanwithsammy-Module-5.apkg">Module 5</a>
+                <a class="btn btn-primary" href="Germanwithsammy-Module-6.apkg">Module 6</a>
+                <a class="btn btn-primary" href="Germanwithsammy-Module-7.apkg">Module 7</a>
+                <a class="btn btn-primary" href="Germanwithsammy-Module-8.apkg">Module 8</a>
+                <a class="btn btn-primary" href="Germanwithsammy-Module-9.apkg">Module 9</a>
+            </div>
             <div class="note">
-                Current overview: 443-day streak, German level 51, Diamond league, and 184,833 XP.
+                Import any downloaded package directly into Anki on Mac or PC.
             </div>
         </article>
 
         <aside class="card">
-            <div class="kicker">Flashcard library</div>
-            <h2>Anki deck files</h2>
+            <div class="kicker">Contents</div>
+            <h2>Files in this folder</h2>
             <ul>
                 <li><a href="Germanwithsammy-Module-1.apkg">Germanwithsammy-Module-1.apkg</a></li>
                 <li><a href="Germanwithsammy-Module-2.apkg">Germanwithsammy-Module-2.apkg</a></li>
@@ -207,17 +187,6 @@ footer {
                 <li><a href="README.txt">README.txt</a></li>
             </ul>
         </aside>
-    </section>
-
-    <section class="card" style="margin-top: 24px;">
-        <div class="kicker">How I use it</div>
-        <h2>Study workflow</h2>
-        <ul>
-            <li>Use Duolingo for daily consistency and short practice sessions.</li>
-            <li>Download the `.apkg` files from this page.</li>
-            <li>Import the decks into Anki on Mac or PC.</li>
-            <li>Use Anki for deeper review and long-term retention.</li>
-        </ul>
     </section>
 
     <footer>
