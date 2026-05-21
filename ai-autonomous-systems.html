@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & Autonomous Systems — Marcelo Schmidt</title>
+    <meta name="description" content="How Marcelo Schmidt uses AI in practice: Anki deck generation, election outreach workflows, inbox-driven expense tracking, and lightweight personal automation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0c0c0c;
+            --bg-card: #161616;
+            --bg-card-hover: #1c1c1c;
+            --text: #e8e8e8;
+            --text-muted: #9aa0a6;
+            --accent: #4ecdc4;
+            --border: #222;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+        }
+        .wrap {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 36px 20px 80px;
+        }
+        .back {
+            display: inline-block;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-bottom: 28px;
+        }
+        .back:hover { color: var(--accent); }
+        .hero, .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+        .eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            line-height: 1.08;
+            margin-bottom: 14px;
+        }
+        .lead {
+            color: var(--text-muted);
+            max-width: 760px;
+            font-size: 1.05rem;
+        }
+        h2 {
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+        }
+        p, li {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+        }
+        ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+        .callout {
+            margin-top: 18px;
+            padding: 16px 18px;
+            border-radius: 12px;
+            background: rgba(78,205,196,0.08);
+            border: 1px solid rgba(78,205,196,0.16);
+            color: var(--text-muted);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-top: 14px;
+        }
+        .mini {
+            background: var(--bg-card-hover);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px;
+        }
+        .mini h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        footer {
+            margin-top: 28px;
+            color: #6f767d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <a class="back" href="index.html#interests">← Back to Interests</a>
+
+        <section class="hero">
+            <div class="eyebrow">AI & Autonomous Systems</div>
+            <h1>Using AI for real workflows, not just demos</h1>
+            <p class="lead">
+                I’m interested in AI when it leaves the toy stage and becomes useful: learning workflows, owner outreach, inbox-driven automation, expense tracking, and small systems that reduce friction without pretending to replace judgment.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>The arc so far</h2>
+            <p>
+                My AI workflow started with simple assistance and quickly became more practical. Instead of treating AI as a chatbot novelty, I began using it as a coordination layer: reading inboxes, organizing data, building flashcards, preparing outreach drafts, and updating spreadsheets with structured information pulled from real documents.
+            </p>
+            <div class="callout">
+                The important shift was this: AI became more useful when it was connected to my actual systems — email, documents, spreadsheets, storage, and recurring tasks — while still keeping me in the loop for review and final decisions.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>1) Anki decks from real German reading</h2>
+            <p>
+                One of the most useful workflows has been turning German articles into Anki decks. Instead of memorizing random vocabulary lists, I can feed in a news paragraph and extract the words, phrases, and structures that actually slowed me down while reading.
+            </p>
+            <ul>
+                <li>Article text goes in</li>
+                <li>Unknown words and patterns come out as flashcards</li>
+                <li>The result is packaged into an Anki deck for iPhone and desktop</li>
+                <li>The deck can also be published on my website as part of a growing personal German library</li>
+            </ul>
+            <p style="margin-top: 14px;">
+                The best part is that the deck reflects what I genuinely need to learn, not what a generic textbook assumes I need.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>2) Cliffs owner outreach: email drafts, then text-message workflow</h2>
+            <p>
+                Another recent example was the AOAO board-election outreach for whole-unit owners at the Cliffs. The AI helped turn a raw contact spreadsheet into individualized outreach drafts, then later into a more manual but still structured text-message workflow.
+            </p>
+            <div class="grid">
+                <div class="mini">
+                    <h3>Email stage</h3>
+                    <p>Build personalized Gmail drafts by unit, keep everything in draft form, and let me review before anything goes out.</p>
+                </div>
+                <div class="mini">
+                    <h3>Text stage</h3>
+                    <p>Create click-to-open text-message pages so I can work through contacts one by one instead of blasting messages blindly.</p>
+                </div>
+                <div class="mini">
+                    <h3>Reply tracking</h3>
+                    <p>Match phone numbers back to owners, separate replies from non-replies, and keep the follow-up list clean.</p>
+                </div>
+            </div>
+            <p style="margin-top: 14px;">
+                That’s the kind of AI use I like: not vague “agentic” hype, but something that saves real time while preserving review and control.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>3) Expense tracking from inboxes into Google Sheets</h2>
+            <p>
+                The most practical automation may be financial: giving the system access to my inboxes so it can pull bills, invoices, and statements, then update my Google Sheets and archive source files into the right Google Drive folders.
+            </p>
+            <ul>
+                <li>Read inboxes for utility bills, credit-card statements, prescriptions, and other recurring documents</li>
+                <li>Extract the relevant numbers and dates</li>
+                <li>Write structured updates into Google Sheets</li>
+                <li>Save statement PDFs into organized Google Drive folders for later reference</li>
+            </ul>
+            <p style="margin-top: 14px;">
+                This is especially useful because it turns messy personal admin into something closer to a repeatable bookkeeping pipeline. I still review important decisions, but I don’t have to manually retype every number.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>What I’ve learned</h2>
+            <p>
+                The sweet spot is not “let AI run everything.” It is closer to: let AI do the repetitive reading, sorting, extracting, and drafting — then let the human decide what matters. That balance works well for language learning, homeowner outreach, and personal finance administration.
+            </p>
+            <div class="callout">
+                In other words: AI is most valuable when it helps me think and act faster inside systems I already care about — not when it tries to impersonate judgment it doesn’t actually have.
+            </div>
+        </section>
+
+        <footer>
+            © 2026 Marcelo Schmidt — AI & Autonomous Systems
+        </footer>
+    </div>
+</body>
+</html>
