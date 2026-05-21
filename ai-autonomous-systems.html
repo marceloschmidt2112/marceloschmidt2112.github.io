@@ -89,6 +89,38 @@
             gap: 16px;
             margin-top: 14px;
         }
+        .diagram {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+        .node {
+            min-width: 120px;
+            flex: 1 1 120px;
+            background: var(--bg-card-hover);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 12px;
+            text-align: center;
+        }
+        .node strong {
+            display: block;
+            color: var(--text);
+            font-size: 0.92rem;
+            margin-bottom: 4px;
+        }
+        .node span {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+        .arrow {
+            color: var(--accent);
+            font-size: 1.4rem;
+            line-height: 1;
+            flex: 0 0 auto;
+        }
         .mini {
             background: var(--bg-card-hover);
             border: 1px solid var(--border);
@@ -133,6 +165,15 @@
             <p>
                 One of the most useful workflows has been turning German articles into Anki decks. Instead of memorizing random vocabulary lists, I can feed in a news paragraph and extract the words, phrases, and structures that actually slowed me down while reading.
             </p>
+            <div class="diagram">
+                <div class="node"><strong>German article</strong><span>real reading material</span></div>
+                <div class="arrow">→</div>
+                <div class="node"><strong>AI extraction</strong><span>words + structures</span></div>
+                <div class="arrow">→</div>
+                <div class="node"><strong>Anki deck</strong><span>.apkg package</span></div>
+                <div class="arrow">→</div>
+                <div class="node"><strong>Study + website</strong><span>learn and publish</span></div>
+            </div>
             <ul>
                 <li>Article text goes in</li>
                 <li>Unknown words and patterns come out as flashcards</li>
@@ -149,6 +190,15 @@
             <p>
                 Another recent example was the AOAO board-election outreach for whole-unit owners at the Cliffs. The AI helped turn a raw contact spreadsheet into individualized outreach drafts, then later into a more manual but still structured text-message workflow.
             </p>
+            <div class="diagram">
+                <div class="node"><strong>Owner list</strong><span>spreadsheet contacts</span></div>
+                <div class="arrow">→</div>
+                <div class="node"><strong>AI drafts</strong><span>email + SMS copy</span></div>
+                <div class="arrow">→</div>
+                <div class="node"><strong>Review/send</strong><span>human in the loop</span></div>
+                <div class="arrow">→</div>
+                <div class="node"><strong>Replies tracked</strong><span>follow-up list</span></div>
+            </div>
             <div class="grid">
                 <div class="mini">
                     <h3>Email stage</h3>
@@ -173,6 +223,15 @@
             <p>
                 The most practical automation may be financial: giving the system access to my inboxes so it can pull bills, invoices, and statements, then update my Google Sheets and archive source files into the right Google Drive folders.
             </p>
+            <div class="diagram">
+                <div class="node"><strong>Inboxes</strong><span>bills + statements</span></div>
+                <div class="arrow">→</div>
+                <div class="node"><strong>AI extraction</strong><span>dates + amounts</span></div>
+                <div class="arrow">→</div>
+                <div class="node"><strong>Google Sheets</strong><span>expense updates</span></div>
+                <div class="arrow">→</div>
+                <div class="node"><strong>Drive archive</strong><span>source documents saved</span></div>
+            </div>
             <ul>
                 <li>Read inboxes for utility bills, credit-card statements, prescriptions, and other recurring documents</li>
                 <li>Extract the relevant numbers and dates</li>
