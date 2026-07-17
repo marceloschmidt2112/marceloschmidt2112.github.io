@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markets — Treasury Yield Watch — Marcelo Schmidt</title>
+    <meta name="description" content="Daily snapshot of key US Treasury yields (3-month, 5-year, 10-year, 30-year) with 6-month history.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0c0c0c;
+            --bg-card: #161616;
+            --bg-card-hover: #1c1c1c;
+            --text: #e8e8e8;
+            --text-muted: #9aa0a6;
+            --text-dim: #555;
+            --accent: #4ecdc4;
+            --up: #ff6b6b;         /* yields UP = bad for bond holders / mortgages */
+            --down: #4ecdc4;       /* yields DOWN = friendlier */
+            --border: #222;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+        .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; }
+        .back {
+            display: inline-block;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-bottom: 28px;
+            font-size: 0.9rem;
+        }
+        .back:hover { color: var(--accent); }
+
+        .header { margin-bottom: 32px; }
+        .eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        h1 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            line-height: 1.1;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+        .lead {
+            color: var(--text-muted);
+            max-width: 760px;
+            font-size: 1rem;
+        }
+        .updated {
+            display: inline-block;
+            margin-top: 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .card:hover { background: var(--bg-card-hover); border-color: #2a2a2a; }
+        .card .sym {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        .card .name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 2px;
+            margin-bottom: 12px;
+        }
+        .card .yield {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+        .card .yield .pct { color: var(--text-dim); font-size: 1rem; margin-left: 2px; }
+        .card .change {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            margin-top: 4px;
+        }
+        .change.up   { color: var(--up); }
+        .change.down { color: var(--down); }
+        .change.flat { color: var(--text-muted); }
+        .card svg.spark { display: block; width: 100%; height: 44px; margin-top: 12px; }
+        .card .range {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            margin-top: 8px;
+            display: flex; justify-content: space-between;
+        }
+        .card .why {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            line-height: 1.5;
+        }
+
+        .curve-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .curve-card h2 {
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+        }
+        .curve-card p.sub {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-bottom: 18px;
+        }
+        .curve-svg { width: 100%; height: 220px; }
+
+        .notes {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px 24px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .notes strong { color: var(--text); }
+
+        .err {
+            background: rgba(255,107,107,0.08);
+            border: 1px solid rgba(255,107,107,0.3);
+            padding: 14px 18px;
+            border-radius: 10px;
+            color: var(--up);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <a href="index.html" class="back">← Back home</a>
+
+    <div class="header">
+        <div class="eyebrow">// markets · treasury yield watch</div>
+        <h1>US Treasury Yields</h1>
+        <p class="lead">
+            A simple daily snapshot of the four benchmark US Treasury yields I care about.
+            Updated once per US trading day; data from Yahoo Finance, refreshed by a scheduled
+            GitHub Action after the New York close.
+        </p>
+        <div class="updated" id="updated">Loading…</div>
+    </div>
+
+    <div id="cards" class="grid"></div>
+
+    <div class="curve-card">
+        <h2>Yield curve</h2>
+        <p class="sub">Latest closes plotted by maturity. An upward-sloping curve is normal; flat or inverted usually means investors expect slower growth or rate cuts ahead.</p>
+        <svg class="curve-svg" id="curve" viewBox="0 0 800 220" preserveAspectRatio="none"></svg>
+    </div>
+
+    <div class="notes">
+        <strong>How to read this.</strong> Yields are quoted in percent (annualized).
+        A move of one hundredth of a percent equals <em>one basis point (bp)</em> — so
+        <span style="color:var(--text)">+5 bp</span> means the yield rose by 0.05%.
+        Red = yields rose that day (bad for existing bond holders and for mortgage rates);
+        teal = yields fell.
+    </div>
+</div>
+
+<script>
+(async function() {
+    const CARDS = document.getElementById('cards');
+    const CURVE = document.getElementById('curve');
+    const UPDATED = document.getElementById('updated');
+
+    // Cache-bust so the page always gets the latest committed JSON.
+    let data;
+    try {
+        const r = await fetch('data/treasuries.json?_=' + Date.now(), { cache: 'no-store' });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        data = await r.json();
+    } catch (e) {
+        CARDS.innerHTML = '<div class="err">Could not load data: ' + e.message + '</div>';
+        return;
+    }
+
+    UPDATED.textContent = 'Last update · ' + new Date(data.updated).toUTCString().replace('GMT','UTC');
+
+    // ── Cards ────────────────────────────────────────────
+    for (const inst of data.instruments) {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        if (inst.error) {
+            card.innerHTML = `
+                <div class="sym">${inst.symbol}</div>
+                <div class="name">${inst.name}</div>
+                <div class="err" style="margin-top:8px">${inst.error}</div>`;
+            CARDS.appendChild(card);
+            continue;
+        }
+
+        const change = inst.change_bp;
+        const cls  = change == null ? 'flat' : (change > 0 ? 'up' : (change < 0 ? 'down' : 'flat'));
+        const sign = change == null ? '' : (change > 0 ? '+' : '');
+        const arrow = change == null ? '' : (change > 0 ? '▲' : (change < 0 ? '▼' : '■'));
+
+        card.innerHTML = `
+            <div class="sym">${inst.symbol}</div>
+            <div class="name">${inst.name}</div>
+            <div class="yield">${inst.last?.toFixed(2)}<span class="pct">%</span></div>
+            <div class="change ${cls}">${arrow} ${sign}${change ?? '—'} bp <span style="color:var(--text-dim)">vs prev close</span></div>
+            <svg class="spark" viewBox="0 0 200 44" preserveAspectRatio="none"></svg>
+            <div class="range">
+                <span>6-mo low ${inst.range_low?.toFixed(2)}%</span>
+                <span>6-mo high ${inst.range_high?.toFixed(2)}%</span>
+            </div>
+            <div class="why">${inst.why}</div>`;
+        CARDS.appendChild(card);
+
+        // Sparkline
+        const svg = card.querySelector('svg.spark');
+        const ys = inst.history.map(h => h.y);
+        drawSparkline(svg, ys, cls);
+    }
+
+    // ── Yield curve ──────────────────────────────────────
+    drawYieldCurve(CURVE, data.instruments);
+
+    function drawSparkline(svg, values, cls) {
+        if (!values.length) return;
+        const W = 200, H = 44, pad = 2;
+        const min = Math.min(...values);
+        const max = Math.max(...values);
+        const range = (max - min) || 1;
+        const pts = values.map((v, i) => {
+            const x = pad + (i / (values.length - 1)) * (W - 2 * pad);
+            const y = H - pad - ((v - min) / range) * (H - 2 * pad);
+            return `${x.toFixed(1)},${y.toFixed(1)}`;
+        }).join(' ');
+        const color = cls === 'up' ? '#ff6b6b' : cls === 'down' ? '#4ecdc4' : '#888';
+        svg.innerHTML = `
+            <polyline fill="none" stroke="${color}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" points="${pts}" opacity="0.95"/>
+            <circle cx="${W - pad}" cy="${(H - pad - ((values[values.length-1] - min) / range) * (H - 2 * pad)).toFixed(1)}" r="2.3" fill="${color}"/>`;
+    }
+
+    function drawYieldCurve(svg, instruments) {
+        // Map to maturity in years for X positioning.
+        const maturity = { '^IRX': 0.25, '^FVX': 5, '^TNX': 10, '^TYX': 30 };
+        const pts = instruments
+            .filter(i => !i.error && i.last != null && maturity[i.symbol] != null)
+            .map(i => ({ x: maturity[i.symbol], y: i.last, label: i.name, symbol: i.symbol }))
+            .sort((a, b) => a.x - b.x);
+        if (!pts.length) return;
+
+        const W = 800, H = 220, padL = 50, padR = 30, padT = 20, padB = 40;
+        const xMin = 0, xMax = 30;
+        const yMin = Math.max(0, Math.min(...pts.map(p => p.y)) - 0.3);
+        const yMax = Math.max(...pts.map(p => p.y)) + 0.3;
+
+        const xPos = x => padL + (Math.log(x + 0.1) - Math.log(0 + 0.1)) / (Math.log(xMax + 0.1) - Math.log(0 + 0.1)) * (W - padL - padR);
+        const yPos = y => padT + (1 - (y - yMin) / (yMax - yMin)) * (H - padT - padB);
+
+        let g = '';
+
+        // Grid lines (horizontal)
+        const yTicks = 4;
+        for (let i = 0; i <= yTicks; i++) {
+            const y = yMin + (i / yTicks) * (yMax - yMin);
+            g += `<line x1="${padL}" x2="${W - padR}" y1="${yPos(y)}" y2="${yPos(y)}" stroke="#222" stroke-width="1"/>`;
+            g += `<text x="${padL - 8}" y="${yPos(y) + 4}" fill="#666" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="end">${y.toFixed(2)}%</text>`;
+        }
+
+        // X ticks at 3M / 5Y / 10Y / 30Y
+        const xTicks = [
+            { at: 0.25, label: '3M' },
+            { at: 5,    label: '5Y' },
+            { at: 10,   label: '10Y' },
+            { at: 30,   label: '30Y' },
+        ];
+        for (const t of xTicks) {
+            g += `<line x1="${xPos(t.at)}" x2="${xPos(t.at)}" y1="${padT}" y2="${H - padB}" stroke="#1a1a1a" stroke-width="1"/>`;
+            g += `<text x="${xPos(t.at)}" y="${H - padB + 18}" fill="#888" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">${t.label}</text>`;
+        }
+
+        // Curve line
+        const linePts = pts.map(p => `${xPos(p.x).toFixed(1)},${yPos(p.y).toFixed(1)}`).join(' ');
+        g += `<polyline fill="none" stroke="#4ecdc4" stroke-width="2" points="${linePts}"/>`;
+
+        // Data points + labels
+        for (const p of pts) {
+            g += `<circle cx="${xPos(p.x)}" cy="${yPos(p.y)}" r="4" fill="#4ecdc4"/>`;
+            g += `<text x="${xPos(p.x)}" y="${yPos(p.y) - 10}" fill="#e8e8e8" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">${p.y.toFixed(2)}%</text>`;
+        }
+
+        svg.innerHTML = g;
+    }
+})();
+</script>
+</body>
+</html>
