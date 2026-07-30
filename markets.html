@@ -183,6 +183,31 @@
         .spread-tag.invert  { color: var(--up); border-color: rgba(255,107,107,0.35); }
         .spread-svg { width: 100%; height: 220px; }
 
+        .spread-read {
+            margin-top: 18px;
+            padding: 16px 20px;
+            background: rgba(78,205,196,0.05);
+            border: 1px solid rgba(78,205,196,0.18);
+            border-left: 3px solid var(--down);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: var(--text);
+        }
+        .spread-read.warn    { background: rgba(255,107,107,0.05); border-color: rgba(255,107,107,0.20); border-left-color: var(--up); }
+        .spread-read.neutral { background: rgba(255,255,255,0.02); border-color: #2a2a2a;             border-left-color: var(--text-muted); }
+        .spread-read h3 {
+            margin: 0 0 6px 0;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+        }
+        .spread-read p { margin: 0 0 8px 0; }
+        .spread-read p:last-child { margin-bottom: 0; }
+        .spread-read .short { color: var(--text-dim); font-size: 0.85rem; }
+
         .notes {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -228,13 +253,17 @@
 
     <div class="curve-card">
         <h2>Curve steepness — 30Y minus 3M</h2>
-        <p class="sub">The spread between the long end and the short end, over the last six months. Below zero the curve is <em>inverted</em>, historically a recession warning. Above ~150 bp is a steep, growth-friendly shape. Rising = markets pricing cuts sooner or higher long-term inflation risk; falling = the reverse.</p>
+        <p class="sub">How much more the 30-year Treasury yields than the 3-month T-bill. When the short end drops it usually means the market thinks the Fed will cut rates. When the long end rises it usually means the market is worried about inflation or the amount of government debt being issued. Below zero (“inverted”) has historically been a recession warning.</p>
         <div class="spread-head">
             <div class="spread-now" id="spread-now">—<span class="bp"> bp</span></div>
             <div class="spread-delta flat" id="spread-delta">—</div>
             <div class="spread-tag" id="spread-tag">—</div>
         </div>
         <svg class="spread-svg" id="spread" viewBox="0 0 800 220" preserveAspectRatio="none"></svg>
+        <div class="spread-read neutral" id="spread-read">
+            <h3>Today's read</h3>
+            <p>Loading…</p>
+        </div>
     </div>
 
     <div class="notes">
@@ -417,6 +446,73 @@
         else if (last.y > 150) { tag = 'steep';  tagText = 'Steep'; }
         tagEl.className = 'spread-tag ' + tag;
         tagEl.textContent = tagText;
+
+        // Plain-English "Today's read": describe WHERE the curve sits and WHICH end drove today's move.
+        const readEl = document.getElementById('spread-read');
+        if (readEl) {
+            // Shape sentence (where the curve sits today)
+            let shape;
+            if (last.y < 0) {
+                shape = 'The short end is <strong>paying more</strong> than the long end — the curve is <strong>inverted</strong>. Historically this shows up before recessions, though the timing can be a year or more away.';
+            } else if (last.y < 50) {
+                shape = 'Short and long yields are <strong>almost the same</strong>. The Fed is still holding rates tight; markets aren’t yet convinced growth or cuts are coming.';
+            } else if (last.y <= 150) {
+                shape = 'The long end pays more than the short end by a <strong>normal, healthy amount</strong>. This is what a functioning economy usually looks like.';
+            } else {
+                shape = 'The long end pays <strong>a lot more</strong> than the short end — the curve is <strong>steep</strong>. This happens when the market expects the Fed to cut, or is worried about long-term inflation, or both.';
+            }
+
+            // Movement sentence (what actually moved today, in normal words)
+            const shortBp = (short.change_bp != null) ? short.change_bp : 0;
+            const longBp  = (long.change_bp  != null) ? long.change_bp  : 0;
+            const shortAbs = Math.abs(shortBp), longAbs = Math.abs(longBp);
+            const moved = (n) => Math.abs(n) >= 2;
+            const dir   = (n) => n > 0 ? 'rose' : 'fell';
+            const readCls = ['neutral'];
+            let movement, meaning;
+
+            if (!moved(shortBp) && !moved(longBp)) {
+                movement = 'Both ends were <strong>quiet today</strong> — the short end and the long end barely moved.';
+                meaning  = 'No news for the curve; wait for the next Fed data or auction to change the picture.';
+            } else if (shortBp < 0 && longBp <= 0 && shortAbs > longAbs) {
+                movement = `The <strong>short end fell</strong> (3M ${shortBp.toFixed(0)} bp) more than the long end did (30Y ${longBp.toFixed(0)} bp).`;
+                meaning  = 'This is the <strong>good kind of steepening</strong>: the market is pricing in Fed rate cuts, which usually helps the economy and stocks.';
+                readCls.push('good');
+            } else if (longBp > 0 && shortBp >= 0 && longAbs > shortAbs) {
+                movement = `The <strong>long end rose</strong> (30Y ${longBp > 0 ? '+' : ''}${longBp.toFixed(0)} bp) more than the short end did (3M ${shortBp > 0 ? '+' : ''}${shortBp.toFixed(0)} bp).`;
+                meaning  = 'This is the <strong>uglier kind of steepening</strong>: markets are worried about inflation sticking around, or about how much government debt is being issued. Long-term mortgage rates tend to rise with this.';
+                readCls.push('warn'); readCls[0] = 'warn'; // override neutral
+            } else if (shortBp < 0 && longBp > 0) {
+                movement = `A <strong>split day</strong>: the short end fell (3M ${shortBp.toFixed(0)} bp) while the long end rose (30Y +${longBp.toFixed(0)} bp).`;
+                meaning  = 'Mixed signal — the market is pricing in Fed cuts <em>and</em> worrying about inflation at the same time. Classic “stagflation” anxiety when it persists.';
+                readCls.push('warn'); readCls[0] = 'warn';
+            } else if (shortBp > 0 && longBp < 0) {
+                movement = `A <strong>flattening day</strong>: the short end rose (3M +${shortBp.toFixed(0)} bp) while the long end fell (30Y ${longBp.toFixed(0)} bp).`;
+                meaning  = 'The market is walking back rate-cut bets or getting more confident inflation will come down. Can lead toward inversion if it keeps up.';
+            } else if (shortBp > 0 && longBp >= 0) {
+                movement = `Both ends rose today, with the <strong>short end leading</strong> (3M +${shortBp.toFixed(0)} bp vs 30Y ${longBp > 0 ? '+' : ''}${longBp.toFixed(0)} bp).`;
+                meaning  = 'Markets are pushing rate-cut expectations further out, or pricing in a Fed that stays higher for longer.';
+            } else if (longBp < 0 && shortBp <= 0) {
+                movement = `Both ends fell today, with the <strong>long end leading</strong> (30Y ${longBp.toFixed(0)} bp vs 3M ${shortBp.toFixed(0)} bp).`;
+                meaning  = 'Recession or slowdown fears — investors are buying long-dated Treasuries as a safe haven, pushing their yields down.';
+            } else {
+                movement = `Short end ${dir(shortBp)} ${shortAbs.toFixed(0)} bp; long end ${dir(longBp)} ${longAbs.toFixed(0)} bp.`;
+                meaning  = 'Mixed movement without a strong theme.';
+            }
+
+            // Spread-change bookend so Marcelo sees WHY the headline number changed.
+            const spreadDir  = dayChange > 0 ? 'widened' : dayChange < 0 ? 'narrowed' : 'held';
+            const spreadWord = dayChange > 0 ? 'steeper' : dayChange < 0 ? 'flatter' : 'unchanged';
+            const spreadLine = (dayChange === 0)
+                ? 'The spread didn’t change today.'
+                : `The spread ${spreadDir} by ${Math.abs(dayChange).toFixed(0)} bp — the curve got <strong>${spreadWord}</strong>.`;
+
+            readEl.className = 'spread-read ' + readCls[0];
+            readEl.innerHTML = `<h3>Today's read</h3>` +
+                `<p>${shape}</p>` +
+                `<p>${movement} ${meaning}</p>` +
+                `<p class="short">${spreadLine}</p>`;
+        }
 
         const W = 800, H = 220, padL = 56, padR = 30, padT = 20, padB = 32;
         const ys = series.map(p => p.y);
