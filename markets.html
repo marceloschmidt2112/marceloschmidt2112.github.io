@@ -146,6 +146,43 @@
         }
         .curve-svg { width: 100%; height: 220px; }
 
+        .spread-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+        .spread-now {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+        .spread-now .bp { color: var(--text-dim); font-size: 1rem; margin-left: 2px; }
+        .spread-delta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+        .spread-delta.up   { color: var(--up); }
+        .spread-delta.down { color: var(--down); }
+        .spread-delta.flat { color: var(--text-muted); }
+        .spread-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+        .spread-tag.steep   { color: var(--down); border-color: rgba(78,205,196,0.35); }
+        .spread-tag.normal  { color: var(--text); border-color: #333; }
+        .spread-tag.flat-t  { color: var(--text-muted); border-color: #333; }
+        .spread-tag.invert  { color: var(--up); border-color: rgba(255,107,107,0.35); }
+        .spread-svg { width: 100%; height: 220px; }
+
         .notes {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -187,6 +224,17 @@
         <h2>Yield curve</h2>
         <p class="sub">Latest closes plotted by maturity. An upward-sloping curve is normal; flat or inverted usually means investors expect slower growth or rate cuts ahead.</p>
         <svg class="curve-svg" id="curve" viewBox="0 0 800 220" preserveAspectRatio="none"></svg>
+    </div>
+
+    <div class="curve-card">
+        <h2>Curve steepness — 30Y minus 3M</h2>
+        <p class="sub">The spread between the long end and the short end, over the last six months. Below zero the curve is <em>inverted</em>, historically a recession warning. Above ~150 bp is a steep, growth-friendly shape. Rising = markets pricing cuts sooner or higher long-term inflation risk; falling = the reverse.</p>
+        <div class="spread-head">
+            <div class="spread-now" id="spread-now">—<span class="bp"> bp</span></div>
+            <div class="spread-delta flat" id="spread-delta">—</div>
+            <div class="spread-tag" id="spread-tag">—</div>
+        </div>
+        <svg class="spread-svg" id="spread" viewBox="0 0 800 220" preserveAspectRatio="none"></svg>
     </div>
 
     <div class="notes">
@@ -258,6 +306,9 @@
     // ── Yield curve ──────────────────────────────────────
     drawYieldCurve(CURVE, data.instruments);
 
+    // ── 3M–30Y spread over time ──────────────────────────
+    drawSpread(data.instruments);
+
     function drawSparkline(svg, values, cls) {
         if (!values.length) return;
         const W = 200, H = 44, pad = 2;
@@ -323,6 +374,96 @@
             g += `<circle cx="${xPos(p.x)}" cy="${yPos(p.y)}" r="4" fill="#4ecdc4"/>`;
             g += `<text x="${xPos(p.x)}" y="${yPos(p.y) - 10}" fill="#e8e8e8" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">${p.y.toFixed(2)}%</text>`;
         }
+
+        svg.innerHTML = g;
+    }
+
+    function drawSpread(instruments) {
+        const svg   = document.getElementById('spread');
+        const nowEl = document.getElementById('spread-now');
+        const dEl   = document.getElementById('spread-delta');
+        const tagEl = document.getElementById('spread-tag');
+
+        const short = instruments.find(i => i.symbol === '^IRX');
+        const long  = instruments.find(i => i.symbol === '^TYX');
+        if (!short || !long || short.error || long.error) return;
+
+        // Spread series: for every date where BOTH have a close, (30Y - 3M) in basis points.
+        const shortMap = new Map(short.history.map(h => [h.t, h.y]));
+        const series = [];
+        for (const h of long.history) {
+            const s = shortMap.get(h.t);
+            if (s == null) continue;
+            series.push({ t: h.t, y: (h.y - s) * 100 });
+        }
+        if (series.length < 2) return;
+
+        const last = series[series.length - 1];
+        const prev = series[series.length - 2];
+        const dayChange = last.y - prev.y;
+        const sign = last.y >= 0 ? '+' : '';
+
+        nowEl.innerHTML = `${sign}${last.y.toFixed(0)}<span class="bp"> bp</span>`;
+
+        const dCls   = dayChange > 0 ? 'up' : dayChange < 0 ? 'down' : 'flat';
+        const dSign  = dayChange > 0 ? '+' : '';
+        const dArrow = dayChange > 0 ? '▲' : dayChange < 0 ? '▼' : '■';
+        dEl.className = 'spread-delta ' + dCls;
+        dEl.innerHTML = `${dArrow} ${dSign}${dayChange.toFixed(0)} bp <span style="color:var(--text-dim)">day change</span>`;
+
+        let tag = 'normal', tagText = 'Normal';
+        if (last.y < 0)        { tag = 'invert'; tagText = 'Inverted'; }
+        else if (last.y < 50)  { tag = 'flat-t'; tagText = 'Flat'; }
+        else if (last.y > 150) { tag = 'steep';  tagText = 'Steep'; }
+        tagEl.className = 'spread-tag ' + tag;
+        tagEl.textContent = tagText;
+
+        const W = 800, H = 220, padL = 56, padR = 30, padT = 20, padB = 32;
+        const ys = series.map(p => p.y);
+        let yMin = Math.min(0, Math.min(...ys));
+        let yMax = Math.max(...ys);
+        const yPad = Math.max(5, (yMax - yMin) * 0.08);
+        yMin -= yPad; yMax += yPad;
+
+        const tMin = series[0].t;
+        const tMax = series[series.length - 1].t;
+        const xPos = t => padL + ((t - tMin) / (tMax - tMin)) * (W - padL - padR);
+        const yPos = y => padT + (1 - (y - yMin) / (yMax - yMin)) * (H - padT - padB);
+
+        let g = '';
+
+        // Horizontal gridlines every 50 bp, with the zero line emphasised.
+        const step = 50;
+        for (let v = Math.ceil(yMin / step) * step; v <= yMax; v += step) {
+            const yy = yPos(v);
+            const isZero = v === 0;
+            g += `<line x1="${padL}" x2="${W - padR}" y1="${yy}" y2="${yy}" stroke="${isZero ? '#4a4a4a' : '#222'}" stroke-width="${isZero ? 1.2 : 1}"${isZero ? '' : ' stroke-dasharray="3 4"'}/>`;
+            g += `<text x="${padL - 8}" y="${yy + 4}" fill="${isZero ? '#888' : '#666'}" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="end">${v > 0 ? '+' : ''}${v} bp</text>`;
+        }
+
+        // Month ticks on the x-axis.
+        const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const seenMonths = new Set();
+        for (const p of series) {
+            const d = new Date(p.t * 1000);
+            const key = d.getUTCFullYear() + '-' + d.getUTCMonth();
+            if (seenMonths.has(key)) continue;
+            seenMonths.add(key);
+            g += `<text x="${xPos(p.t)}" y="${H - padB + 16}" fill="#888" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">${MONTHS[d.getUTCMonth()]}</text>`;
+        }
+
+        // Shaded area from the zero line to the curve.
+        const zeroY   = yPos(0);
+        const areaPts = series.map(p => `${xPos(p.t).toFixed(1)},${yPos(p.y).toFixed(1)}`).join(' ');
+        g += `<defs><linearGradient id="spreadFill" x1="0" y1="0" x2="0" y2="1">` +
+             `<stop offset="0%" stop-color="#4ecdc4" stop-opacity="0.22"/>` +
+             `<stop offset="100%" stop-color="#4ecdc4" stop-opacity="0"/></linearGradient></defs>`;
+        g += `<polygon fill="url(#spreadFill)" points="${xPos(tMin).toFixed(1)},${zeroY.toFixed(1)} ${areaPts} ${xPos(tMax).toFixed(1)},${zeroY.toFixed(1)}"/>`;
+        g += `<polyline fill="none" stroke="#4ecdc4" stroke-width="1.8" points="${areaPts}"/>`;
+
+        const lastX = xPos(last.t), lastY = yPos(last.y);
+        g += `<circle cx="${lastX}" cy="${lastY}" r="3.5" fill="#4ecdc4"/>`;
+        g += `<text x="${lastX - 8}" y="${lastY - 8}" fill="#e8e8e8" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="end">${sign}${last.y.toFixed(0)} bp</text>`;
 
         svg.innerHTML = g;
     }
