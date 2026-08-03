@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Markets — Treasury Yield Watch — Marcelo Schmidt</title>
     <meta name="description" content="Daily snapshot of key US Treasury yields (3-month, 5-year, 10-year, 30-year) with 6-month history.">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -276,10 +279,14 @@
 </div>
 
 <script>
-(async function() {
+async function loadTreasuries() {
     const CARDS = document.getElementById('cards');
     const CURVE = document.getElementById('curve');
     const UPDATED = document.getElementById('updated');
+
+    // Reset containers so repeat calls don't stack.
+    CARDS.innerHTML = '';
+    if (CURVE) CURVE.innerHTML = '';
 
     // Cache-bust so the page always gets the latest committed JSON.
     let data;
@@ -563,7 +570,14 @@
 
         svg.innerHTML = g;
     }
-})();
+}
+
+// Initial load + auto-refresh every 5 min + on tab regain focus.
+loadTreasuries();
+setInterval(loadTreasuries, 5 * 60 * 1000);
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) loadTreasuries();
+});
 </script>
 </body>
 </html>
