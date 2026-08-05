@@ -1,21 +1,17 @@
 {
-  "updated": "2026-08-04T22:30:08+00:00",
+  "updated": "2026-08-05T22:30:06+00:00",
   "source": "Yahoo Finance (query1.finance.yahoo.com)",
   "instruments": [
     {
       "symbol": "^IRX",
       "name": "3-Month T-Bill",
       "why": "Closely tracks Fed policy and cash yields.",
-      "last": 3.73,
-      "prev_close": 3.7,
-      "change_bp": 3.0,
+      "last": 3.725,
+      "prev_close": 3.73,
+      "change_bp": -0.5,
       "range_low": 3.557,
       "range_high": 3.805,
       "history": [
-        {
-          "t": 1770297600,
-          "y": 3.578
-        },
         {
           "t": 1770384000,
           "y": 3.59
@@ -507,9 +503,13 @@
         {
           "t": 1785846000,
           "y": 3.73
+        },
+        {
+          "t": 1785932400,
+          "y": 3.725
         }
       ],
-      "regular_market_time": 1785869994,
+      "regular_market_time": 1785956393,
       "currency": "USD",
       "exchange": "CGI"
     },
@@ -517,16 +517,12 @@
       "symbol": "^FVX",
       "name": "5-Year Treasury",
       "why": "Sensitive to medium-term rate expectations.",
-      "last": 4.333,
-      "prev_close": 4.4,
-      "change_bp": -6.7,
+      "last": 4.324,
+      "prev_close": 4.333,
+      "change_bp": -0.9,
       "range_low": 3.512,
       "range_high": 4.461,
       "history": [
-        {
-          "t": 1770297600,
-          "y": 3.75
-        },
         {
           "t": 1770384000,
           "y": 3.755
@@ -1018,9 +1014,13 @@
         {
           "t": 1785846000,
           "y": 4.333
+        },
+        {
+          "t": 1785932400,
+          "y": 4.324
         }
       ],
-      "regular_market_time": 1785869994,
+      "regular_market_time": 1785956393,
       "currency": "USD",
       "exchange": "CGI"
     },
@@ -1028,16 +1028,12 @@
       "symbol": "^TNX",
       "name": "10-Year Treasury",
       "why": "Most important benchmark for mortgages, valuations, and the economy.",
-      "last": 4.627,
-      "prev_close": 4.686,
-      "change_bp": -5.9,
+      "last": 4.617,
+      "prev_close": 4.627,
+      "change_bp": -1.0,
       "range_low": 3.962,
       "range_high": 4.745,
       "history": [
-        {
-          "t": 1770297600,
-          "y": 4.21
-        },
         {
           "t": 1770384000,
           "y": 4.206
@@ -1529,9 +1525,13 @@
         {
           "t": 1785846000,
           "y": 4.627
+        },
+        {
+          "t": 1785932400,
+          "y": 4.617
         }
       ],
-      "regular_market_time": 1785869994,
+      "regular_market_time": 1785956393,
       "currency": "USD",
       "exchange": "CGI"
     },
@@ -1539,16 +1539,12 @@
       "symbol": "^TYX",
       "name": "30-Year Treasury",
       "why": "Long-term inflation and government debt expectations.",
-      "last": 5.19,
-      "prev_close": 5.231,
-      "change_bp": -4.1,
+      "last": 5.174,
+      "prev_close": 5.19,
+      "change_bp": -1.6,
       "range_low": 4.633,
       "range_high": 5.275,
       "history": [
-        {
-          "t": 1770297600,
-          "y": 4.862
-        },
         {
           "t": 1770384000,
           "y": 4.855
@@ -2040,9 +2036,13 @@
         {
           "t": 1785846000,
           "y": 5.19
+        },
+        {
+          "t": 1785932400,
+          "y": 5.174
         }
       ],
-      "regular_market_time": 1785869994,
+      "regular_market_time": 1785956393,
       "currency": "USD",
       "exchange": "CGI"
     }
