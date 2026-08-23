@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The $30 Wire Fee: A Pricing Story, Not a Cost Story — Marcelo Schmidt</title>
+    <meta name="description" content="Wells Fargo raised its retail domestic wire fee from $25 to $30 in 2026. This paper examines whether the increase reflects deposit flight, Fedwire cost pass-through, or commercial repricing. The data point overwhelmingly to the last.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0c0c0c;
+            --bg-card: #161616;
+            --bg-card-hover: #1c1c1c;
+            --text: #e8e8e8;
+            --text-muted: #9aa0a6;
+            --text-dim: #6b7075;
+            --accent: #4ecdc4;
+            --accent-secondary: #ff6b6b;
+            --accent-gold: #f0c040;
+            --border: #222;
+            --border-strong: #2d2d2d;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Source Serif 4', Georgia, serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+            font-size: 17px;
+        }
+        .wrap {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 36px 22px 100px;
+        }
+        .back {
+            display: inline-block;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-bottom: 32px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            letter-spacing: 0.05em;
+        }
+        .back:hover { color: var(--accent); }
+
+        header.masthead {
+            border-bottom: 1px solid var(--border-strong);
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+        }
+        .eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+        h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-weight: 600;
+            font-size: clamp(1.9rem, 4.5vw, 2.7rem);
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            margin-bottom: 18px;
+            color: var(--text);
+        }
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            line-height: 1.5;
+            margin-bottom: 22px;
+            font-style: italic;
+        }
+        .meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            letter-spacing: 0.04em;
+        }
+        .meta span + span::before {
+            content: " · ";
+            margin: 0 6px;
+            color: var(--border-strong);
+        }
+
+        .abstract {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 6px;
+            padding: 22px 24px;
+            margin-bottom: 44px;
+        }
+        .abstract .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .abstract p {
+            color: var(--text);
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-weight: 600;
+            font-size: 1.45rem;
+            margin-top: 48px;
+            margin-bottom: 16px;
+            color: var(--text);
+            letter-spacing: -0.005em;
+        }
+        h2 .num {
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 400;
+            margin-right: 12px;
+            vertical-align: middle;
+            position: relative;
+            top: -2px;
+        }
+        h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 28px;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+        p {
+            color: var(--text);
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+        p.muted { color: var(--text-muted); }
+
+        strong { color: var(--text); font-weight: 600; }
+        em { color: var(--text-muted); }
+
+        ul, ol {
+            margin: 12px 0 20px 22px;
+        }
+        li {
+            color: var(--text);
+            margin-bottom: 8px;
+            font-size: 0.98rem;
+        }
+
+        a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted rgba(78,205,196,0.4); }
+        a:hover { border-bottom-style: solid; }
+
+        .callout {
+            background: rgba(240,192,64,0.06);
+            border: 1px solid rgba(240,192,64,0.2);
+            border-left: 3px solid var(--accent-gold);
+            border-radius: 6px;
+            padding: 18px 22px;
+            margin: 22px 0;
+        }
+        .callout .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent-gold);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .callout p:last-child { margin-bottom: 0; }
+
+        .keystat {
+            background: var(--bg-card);
+            border: 1px solid var(--border-strong);
+            border-radius: 6px;
+            padding: 20px 22px;
+            margin: 22px 0;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 22px;
+            align-items: center;
+        }
+        .keystat .val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.6rem;
+            color: var(--accent);
+            font-weight: 500;
+            line-height: 1;
+        }
+        .keystat .desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .keystat .desc strong { color: var(--text); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.92rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        thead th {
+            text-align: left;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-strong);
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+        }
+        tbody tr:last-child td { border-bottom: none; }
+        td.num { text-align: right; color: var(--accent); }
+        td.chg-pos { color: var(--accent); }
+        td.chg-neg { color: var(--accent-secondary); }
+
+        .refs {
+            margin-top: 60px;
+            padding-top: 28px;
+            border-top: 1px solid var(--border-strong);
+        }
+        .refs h2 { margin-top: 0; }
+        .refs ol {
+            margin-left: 22px;
+            counter-reset: refnum;
+            list-style: none;
+        }
+        .refs li {
+            counter-increment: refnum;
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.55;
+        }
+        .refs li::before {
+            content: "[" counter(refnum) "]";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+        }
+        .refs li .todo {
+            display: inline-block;
+            background: rgba(255,107,107,0.12);
+            color: var(--accent-secondary);
+            padding: 1px 7px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            margin-left: 6px;
+            letter-spacing: 0.05em;
+        }
+        sup a {
+            color: var(--accent);
+            border-bottom: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            padding: 0 2px;
+        }
+
+        .colophon {
+            margin-top: 44px;
+            padding: 18px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-dim);
+            font-size: 0.82rem;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 640px) {
+            body { font-size: 16px; }
+            .wrap { padding: 24px 18px 60px; }
+            h1 { font-size: 1.75rem; }
+            h2 { font-size: 1.2rem; }
+            .keystat { grid-template-columns: 1fr; gap: 8px; }
+            table { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <a class="back" href="index.html">← back to home</a>
+
+        <header class="masthead">
+            <div class="eyebrow">// working paper · retail banking</div>
+            <h1>The $30 Wire Fee: A Pricing Story, Not a Cost Story</h1>
+            <p class="subtitle">Wells Fargo raised its retail domestic wire fee 20% in mid-2026. This paper walks through what the deposit data, Fedwire cost stack, and system-load numbers actually say — and why the most plausible explanation is the least dramatic one.</p>
+            <div class="meta">
+                <span>Marcelo Schmidt</span>
+                <span>August 2026</span>
+                <span>Cascais, Portugal</span>
+            </div>
+        </header>
+
+        <div class="abstract">
+            <div class="label">Abstract</div>
+            <p>In mid-2026 Wells Fargo increased its retail domestic wire transfer fee from $25 to $30, a 20% rise. The intuitive hypothesis — that banks are raising friction fees because deposits are flowing out into money market funds and stablecoins — is empirically weak. Aggregate U.S. commercial bank deposits rose roughly 6% year over year through August 2026, and Wells Fargo's own average deposits grew 10% year over year in Q2 2026. The Fedwire per-transfer cost passed through to the bank is less than one dollar. Fedwire system-wide transfer volume is flat to slightly declining, while dollar value has only risen modestly. The cost-shock narrative does not survive the data. What remains is <strong>commercial repricing</strong>: wire transfers are a price-inelastic service, retail customers rarely comparison-shop them, and $30 is the current test of what the market will bear. The paper closes with an adjacent observation — that Wise's simultaneous ACH funding-fee increase suggests a broader industry pattern of monetizing friction on fiat payment rails while incumbents still can.</p>
+        </div>
+
+        <h2><span class="num">1</span>Introduction</h2>
+        <p>In mid-2026, Wells Fargo — the fourth-largest U.S. bank by assets — raised its <strong>retail domestic wire transfer fee from $25 to $30</strong>.<sup><a href="#ref1">[1]</a></sup> The increase was announced quietly, communicated to customers by the usual mechanism (updated fee schedules), and appears to have generated little public discussion. On its face this is a routine consumer-banking price adjustment. It merits attention only because of two circumstantial factors.</p>
+
+        <p>First, the increase arrives during a period of unusual movement in the U.S. financial system. Money market fund assets have crossed $7.9 trillion; long-end Treasury yields have risen and are being defended by unusual Treasury liquidity operations; foreign private demand for U.S. sovereign debt has weakened materially; and stablecoin issuance has begun to be modeled seriously as a claim on U.S. bank deposits.<sup><a href="#ref2">[2]</a></sup><sup><a href="#ref3">[3]</a></sup> Against that backdrop it is reasonable to ask whether a bank raising the price of moving money out is a small signal from a larger story.</p>
+
+        <p>Second, the increase is proportionally large. Twenty percent, applied to a fee that already carried substantial margin, is not a rounding adjustment. It represents an active pricing decision.</p>
+
+        <p>This paper works through the candidate explanations. It begins with the "deposit flight" hypothesis, tests it against aggregate and firm-level deposit data, examines the actual Fedwire cost stack, considers the volume story, sets both against the broader capital reallocation occurring in U.S. financial markets, and concludes that the most parsimonious explanation is commercial repricing — a repricing that is worth noticing precisely because it is not isolated.</p>
+
+        <h2><span class="num">2</span>The Deposit-Flight Hypothesis</h2>
+        <p>The instinctive interpretation of a wire-fee increase is behavioral: banks raise the cost of outbound transfers because they are trying to slow the outflow of deposits, or to recoup the balance-sheet cost of losing cheap funding. This is the "friction fee as defensive pricing" story.</p>
+
+        <p>It has real historical precedent. In stress periods — regional bank episodes, deposit runs, and periods when yield curves push depositors into money market funds — banks have used pricing on ancillary services (wire fees, minimum balance requirements, cash-withdrawal thresholds) as levers to make it modestly more expensive to leave. The hypothesis is at least mechanically coherent.</p>
+
+        <p>It is not, however, supported by the current deposit data.</p>
+
+        <h2><span class="num">3</span>Deposit Data: Aggregate and Firm-Level</h2>
+
+        <h3>3.1 The system aggregate</h3>
+        <p>Federal Reserve H.8 data on commercial bank deposits, through the week ended August 12, 2026, show total deposits at approximately <strong>$17.93 trillion</strong>, versus roughly $16.86 trillion in July 2025 on the seasonally adjusted series.<sup><a href="#ref4">[4]</a></sup> That is an increase of about <strong>$1.07 trillion, or 6.3%, year over year</strong>. The U.S. commercial banking system is not losing deposits in aggregate. It is gaining them.</p>
+
+        <div class="keystat">
+            <div class="val">+6.3%</div>
+            <div class="desc"><strong>Commercial bank deposits, YoY through August 2026</strong><br>Fed H.8 series. The banking system as a whole is a net deposit gainer, not a loser.</div>
+        </div>
+
+        <h3>3.2 Wells Fargo specifically</h3>
+        <p>Whatever is happening at the aggregate level, the pricing decision was made at Wells Fargo. That is where the direct evidence has to be tested. Wells Fargo's second-quarter 2026 results reported:<sup><a href="#ref5">[5]</a></sup></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th style="text-align:right">YoY</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Average deposits</td><td class="num chg-pos">+10%</td></tr>
+                <tr><td>Revenue</td><td class="num chg-pos">+9%</td></tr>
+                <tr><td>Net interest income</td><td class="num chg-pos">+5%</td></tr>
+                <tr><td>Earnings per share</td><td class="num chg-pos">+25%</td></tr>
+            </tbody>
+        </table>
+
+        <p>Deposits up 10% year over year is not a firm losing funding. Revenue up 9%, EPS up 25%, and expanding profitability are not the fingerprints of a bank raising a friction fee to plug a leaking balance sheet. If anything, Wells Fargo's earnings profile in mid-2026 is one of the healthier ones in the peer group.</p>
+
+        <p>The deposit-flight hypothesis, applied to this specific bank at this specific time, is inconsistent with the firm's own disclosures. It must be set aside.</p>
+
+        <h2><span class="num">4</span>The Cost Side: Fedwire Pricing and the Bank's Actual Pass-Through</h2>
+
+        <p>If the fee increase is not defensive, is it explanatory — that is, has Wells Fargo's actual cost of executing a wire risen? The answer requires looking at what the Federal Reserve charges member banks for Fedwire Funds Service execution.</p>
+
+        <p>The 2026 Fedwire per-transfer fee schedule, published by the Federal Reserve Financial Services, is approximately:<sup><a href="#ref6">[6]</a></sup></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Monthly transfer band</th>
+                    <th style="text-align:right">Fee per transfer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>First 14,000</td><td class="num">$0.97</td></tr>
+                <tr><td>14,001–90,000</td><td class="num">$0.30</td></tr>
+                <tr><td>Above 90,000</td><td class="num">$0.195</td></tr>
+            </tbody>
+        </table>
+
+        <p>Incentive volume discounts can push the effective price lower still. A bank of Wells Fargo's size sits deep in the third tier for the substantial majority of its Fedwire volume.</p>
+
+        <div class="keystat">
+            <div class="val">~$0.20</div>
+            <div class="desc"><strong>Approximate Fedwire per-transfer cost to Wells Fargo</strong><br>Compared to the $30 retail fee charged to the customer. The ratio is roughly 150 to 1.</div>
+        </div>
+
+        <p>This does not, of course, imply that Wells Fargo's total cost per wire is $0.20. Wire execution carries meaningful indirect costs: sanctions and OFAC screening, fraud detection, wire-fraud losses (which have risen materially industry-wide), compliance overhead, customer-service handling of disputed or misdirected wires, technology maintenance, and operational risk capital. A realistic all-in cost per retail wire is plausibly in the low single digits — perhaps $2 to $5, depending on how overhead is allocated.</p>
+
+        <p>Even at the top of that range, the gap between all-in cost and $30 price is substantial. And critically, none of these underlying cost components moved by 20% in the twelve months preceding the fee change. There is no cost shock in the payment network layer that necessitates a $5 retail price increase.</p>
+
+        <h2><span class="num">5</span>The Volume Side: Fedwire System Load</h2>
+        <p>A separate question is whether wire volume itself has surged, imposing scaling costs. It has not.</p>
+
+        <p>Federal Reserve Fedwire statistics for July 2026 show approximately <strong>20.1 million transfers processed, worth roughly $110 trillion</strong> in aggregate value. Compared to June 2026, transfer <em>count</em> fell 0.6% while dollar <em>value</em> rose 1.9%.<sup><a href="#ref7">[7]</a></sup> This is a system running normally: fewer transfers, each modestly larger. There is no volume crisis at the payment-rail level to justify an emergency repricing.</p>
+
+        <h2><span class="num">6</span>Structural Context: The Cash-Reallocation Story</h2>
+        <p>Setting aside the deposit-flight hypothesis does not require dismissing the broader observation that money is moving in unusual ways in 2026. It is. But the movement is a <em>capital-allocation</em> story, not a deposit-flight one.</p>
+
+        <p>Consider what has actually happened in the twelve months to August 2026:</p>
+
+        <ul>
+            <li><strong>Money market fund assets stand at approximately $7.93 trillion</strong>, per the Investment Company Institute weekly series. The $7 trillion threshold was first crossed only in March 2025.<sup><a href="#ref2">[2]</a></sup> Retail money market fund holdings alone total approximately <strong>$3.11 trillion</strong>. This is a real reallocation, driven principally by the yield advantage of government money market funds over ordinary bank checking and savings balances.</li>
+            <li><strong>Stablecoin issuance is being modeled seriously as a claim on U.S. bank deposits.</strong> Standard Chartered has estimated that stablecoins could displace as much as $500 billion of U.S. bank deposits by 2028.<sup><a href="#ref3">[3]</a></sup> That is a forward estimate, not a realized flow, but the fact that it is being modeled at all — and that banks are visibly attentive to the number — is itself informative.</li>
+            <li><strong>Foreign private demand for U.S. long-duration Treasuries has weakened.</strong> Private foreign purchases of Treasury notes and bonds are running more than 40% below year-earlier levels on Treasury International Capital data.<sup><a href="#ref8">[8]</a></sup> The Treasury has taken unusual liquidity-support actions at the long end of the curve in response.</li>
+            <li><strong>Bond funds continue to attract flows.</strong> In the most recent weekly ICI data, bond mutual funds and ETFs received approximately $9.9 billion of net inflows, including roughly $1.9 billion into government and Treasury funds. Money market funds saw a small $3.6 billion outflow the same week after two prior weeks of inflows.<sup><a href="#ref9">[9]</a></sup></li>
+        </ul>
+
+        <p>Each of these is a genuine, non-trivial structural signal. They collectively describe an environment in which U.S. household and institutional cash is being <em>reallocated</em> — from checking balances into money funds, from long-duration Treasuries into shorter-duration and money-market instruments, and, at the margin, from bank deposits toward stablecoin float. But this reallocation is happening <em>through</em> the banking system, not <em>out of</em> it. Deposits are not, in aggregate or at Wells Fargo specifically, falling.</p>
+
+        <p>The capital-allocation story and the deposit-flight story are frequently conflated in casual commentary. They are not the same story, and the wire-fee decision does not sit inside either one comfortably.</p>
+
+        <h2><span class="num">7</span>What Actually Explains the Increase: Commercial Repricing</h2>
+        <p>Having ruled out the two mechanically satisfying explanations — defensive fee-setting in the face of deposit outflows, and cost pass-through — what remains is the simplest one.</p>
+
+        <p>Wire transfers are a <strong>price-inelastic retail service</strong>. Individual customers rarely comparison-shop wire fees. The volume of wires a typical consumer initiates in a year is small (often zero, occasionally one, rarely more than a handful), and the moments in which a wire is needed — a house purchase, a business closing, an international remittance — are moments in which the cost of the wire is negligible relative to the cost of the underlying transaction. A $5 fee increase on a $250,000 mortgage down-payment wire is invisible.</p>
+
+        <p>Banks periodically test the ceiling on inelastic services. That is what has happened here. Wells Fargo decided $30 was a price customers would tolerate, and there is no visible evidence that customers have declined to tolerate it.</p>
+
+        <p>This is a small, boring conclusion. It is almost certainly the correct one.</p>
+
+        <div class="callout">
+            <div class="label">The subtler pattern</div>
+            <p>The interesting reading is not what this one fee change means in isolation, but what it may indicate about incumbent bank behavior more broadly. Wire fees, ACH origination fees, foreign-exchange spreads on outbound international payments, minimum-balance thresholds, overdraft-related pricing — the entire fee stack on fiat payment rails — is being quietly repriced upward by U.S. incumbents in a period when their medium-term threat is not deposit flight but <strong>disintermediation of the payment layer itself</strong> by tokenized deposits, stablecoin settlement, and account-to-account rails that route around correspondent banking. Monetizing friction while incumbents still control the rails is a rational corporate response. It is worth watching in aggregate even where any single instance is unremarkable.</p>
+        </div>
+
+        <h2><span class="num">8</span>Adjacent Signal: Wise and the Broader Monetization of Fiat Rails</h2>
+        <p>A useful cross-check is whether the pattern is confined to legacy banks or extends across payment providers. Wise (formerly TransferWise), the London-listed cross-border payments firm, simultaneously increased its fee for funding a $10,000 USD transfer via ACH pull to <strong>approximately $17</strong>.<sup><a href="#ref10">[10]</a></sup> The mechanism is different — an ACH debit rather than a Fedwire transfer — but the behavioral direction is the same.</p>
+
+        <p>Wise's cost stack is genuinely different from Wells Fargo's. ACH pulls carry non-trivial fraud-loss exposure: unauthorized-debit disputes, insufficient-funds returns, and reversal windows are all economically material. Some portion of the Wise fee increase almost certainly reflects real loss experience. But the pattern of a legacy bank and a fintech disruptor <em>both</em> raising fees on U.S. fiat funding rails in the same window is not a coincidence. It is more consistent with an industry-wide judgment that the window in which fiat payment infrastructure can be monetized is finite, and that pricing power should be exercised now rather than later.</p>
+
+        <p>A more thorough treatment of the Wise fee history — tracing the trajectory of its ACH funding pricing over the last several years and comparing it to peer fintechs (Revolut, Payoneer, Airwallex) — would help distinguish "Wise-specific loss experience" from "industry-wide repricing." That is outside the scope of this paper but is a natural follow-up.</p>
+
+        <h2><span class="num">9</span>Conclusion</h2>
+        <p>The Wells Fargo wire fee moved from $25 to $30 in mid-2026 not because customers were leaving, not because Fedwire got more expensive, and not because wire volumes surged. Aggregate U.S. commercial bank deposits are up roughly 6% year over year. Wells Fargo's own deposits are up 10%. Fedwire cost pass-through is under one dollar. Wire system volume is flat.</p>
+
+        <p>The change is a commercial repricing of a price-inelastic retail service by an institution that judged its customers would not push back. That judgment appears to have been correct.</p>
+
+        <p>The broader signal worth carrying forward is not the fee itself but the pattern it belongs to: incumbent U.S. payment providers are quietly and consistently raising the price of every friction point on fiat rails, at a moment when the medium-term structural threat to those rails is not a run on deposits but a disintermediation of the payment layer by tokenized alternatives. That is a story worth continuing to track — not through wire fees alone, but through the full fee stack on retail and small-business fiat payments over the next several quarters.</p>
+
+        <div class="refs">
+            <h2>References</h2>
+            <ol>
+                <li id="ref1">Wells Fargo, 2026 Consumer Account Fee and Information Schedule (retail domestic wire transfer fee: $30). <span class="todo">verify URL</span></li>
+                <li id="ref2">Investment Company Institute, Money Market Fund Assets weekly release, mid-August 2026. Retail MMF assets ~$3.11T; total MMF assets ~$7.93T. <a href="https://www.ici.org/research/stats/mmf">ici.org/research/stats/mmf</a></li>
+                <li id="ref3">Standard Chartered Research, projection of stablecoin displacement of U.S. bank deposits by 2028 (~$500B). <span class="todo">verify URL</span></li>
+                <li id="ref4">Federal Reserve Board, H.8 "Assets and Liabilities of Commercial Banks in the United States," week ending August 12, 2026. <a href="https://www.federalreserve.gov/releases/h8/current/">federalreserve.gov/releases/h8/current/</a></li>
+                <li id="ref5">Wells Fargo &amp; Company, Second-Quarter 2026 Earnings Release. <span class="todo">verify URL</span></li>
+                <li id="ref6">Federal Reserve Financial Services, 2026 Fedwire Funds Service Fee Schedule. <a href="https://www.frbservices.org/resources/fees/wires-2026.html">frbservices.org/resources/fees/wires-2026</a> <span class="todo">verify URL</span></li>
+                <li id="ref7">Federal Reserve Financial Services, Fedwire Funds Service Monthly Statistics, July 2026. <a href="https://www.frbservices.org/resources/financial-services/wires/volume-value-stats/monthly-stats.html">frbservices.org monthly stats</a></li>
+                <li id="ref8">U.S. Department of the Treasury, Treasury International Capital (TIC) system, net foreign private purchases of long-term Treasury notes and bonds, 12-month rolling. <span class="todo">verify URL</span></li>
+                <li id="ref9">Investment Company Institute, Combined Estimated Long-Term Fund Flows and ETF Net Issuance, weekly release. <a href="https://www.ici.org/research/stats/combined_flows">ici.org/research/stats/combined_flows</a></li>
+                <li id="ref10">Wise, Send Money pricing page, U.S. to non-USD, ACH funding option, $10,000 send amount. <a href="https://wise.com/us/send-money/">wise.com/us/send-money</a></li>
+            </ol>
+        </div>
+
+        <div class="colophon">
+            Written August 2026 · Cascais, PT.<br>
+            Prepared as a personal working paper. Comments welcome. Data cited is as of writing; markets move.
+        </div>
+    </div>
+</body>
+</html>
