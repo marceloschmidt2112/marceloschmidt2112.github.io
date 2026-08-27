@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Articles — Marcelo Schmidt</title>
+<style>
+  :root { --bg:#0c0c0c; --card:#161616; --text:#e8e8e8; --muted:#a0a0a0; --accent:#4ecdc4; --border:#222; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+  .wrap { max-width:1100px; margin:0 auto; padding:40px 20px 70px; }
+  .top { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:30px; }
+  h1 { font-size: clamp(2rem, 4vw, 3rem); margin:0; }
+  .sub { color:var(--muted); max-width:720px; margin:10px 0 0; }
+  a { color:inherit; }
+  .back { color:var(--accent); text-decoration:none; font-weight:600; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:28px; }
+  .card { display:block; text-decoration:none; background:var(--card); border:1px solid var(--border); border-radius:12px; overflow:hidden; transition:transform .2s,border-color .2s,background .2s; }
+  .card:hover { transform:translateY(-3px); border-color:#333; background:#1c1c1c; }
+  .thumb { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; border-bottom:1px solid var(--border); }
+  .body { padding:18px; }
+  .date { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+  h2 { font-size:1.1rem; margin:0 0 10px; line-height:1.35; }
+  p { margin:0; color:var(--muted); font-size:.94rem; }
+  .cta { display:inline-block; margin-top:14px; color:var(--accent); font-weight:600; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>Articles</h1>
+        <p class="sub">Standalone reading pages with the same listen button and clean typography. Share any page by URL.</p>
+      </div>
+      <a class="back" href="index.html">← Home</a>
+    </div>
+    <div class="grid">
+      <a class="card" href="roy-cohn.html">
+        <img class="thumb" src="media/roy-cohn.jpg" alt="Roy Cohn portrait">
+        <div class="body">
+          <div class="date">2026-08-26</div>
+          <h2>How Roy Cohn Taught Donald Trump Everything</h2>
+          <p>A summary of the New Yorker profile, with the Cohn playbook and the main historical argument.</p>
+          <span class="cta">Read →</span>
+        </div>
+      </a>
+      <a class="card" href="roy-cohn.html">
+        <img class="thumb" src="media/roy-cohn.jpg" alt="Roy Cohn portrait">
+        <div class="body">
+          <div class="date">2026-08-27</div>
+          <h2>Operation Cowboy: The Extraordinary Rescue of Europe’s Lipizzaner Horses</h2>
+          <p>A long-form summary of the WWII rescue mission at Hostau, with the listen button for iPhone/iPad playback.</p>
+          <span class="cta">Read →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
