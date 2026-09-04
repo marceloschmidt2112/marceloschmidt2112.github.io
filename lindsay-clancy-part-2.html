@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>El caso Lindsay Clancy — Parte 2: nulidad del juicio (4 sep 2026)</title>
+<style>
+  :root {
+    --ink: #1d1d1d;
+    --ink-soft: #4f4f4f;
+    --paper: #fbfaf7;
+    --rule: #d8d2c4;
+    --accent: #3f5363;
+    --accent-soft: #edf2f5;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", "Iowan Old Style", serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 18px;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 22px 80px;
+  }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: var(--accent);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+  }
+  header.masthead {
+    text-align: center;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 28px;
+  }
+  .kicker {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: 32px;
+    line-height: 1.15;
+    margin: 0 0 12px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .byline {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .listen-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent-soft);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin: 24px 0 32px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  .listen-bar .label {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-right: 4px;
+    flex: 1 1 auto;
+  }
+  .listen-bar button {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid var(--accent);
+    background: white;
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: inherit;
+    min-height: 40px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .listen-bar button:hover,
+  .listen-bar button:focus {
+    background: var(--accent);
+    color: white;
+    outline: none;
+  }
+  .listen-bar button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .listen-bar button.playing { background: var(--accent); color: white; }
+  #tts-status {
+    font-size: 13px;
+    color: var(--ink-soft);
+    width: 100%;
+    margin-top: 4px;
+  }
+  figure.hero { margin: 0 0 32px; text-align: center; }
+  figure.hero img {
+    width: 100%;
+    max-width: 720px;
+    height: auto;
+    border-radius: 6px;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+  }
+  figure.hero figcaption {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 10px;
+    font-style: italic;
+  }
+  article p { margin: 0 0 18px; }
+  article strong { font-weight: 700; }
+  article em { font-style: italic; }
+  article h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    margin: 36px 0 14px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .lede {
+    font-size: 20px;
+    color: var(--ink);
+    font-style: italic;
+    line-height: 1.55;
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 16px;
+    margin: 0 0 24px;
+  }
+  .sources {
+    background: white;
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 32px 0 20px;
+    border-radius: 0 6px 6px 0;
+  }
+  .sources h2 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 12px;
+    font-weight: 700;
+    border: none;
+    padding-top: 0;
+  }
+  .sources ul { margin: 0; padding-left: 22px; }
+  .sources li {
+    margin-bottom: 8px;
+    font-size: 15px;
+    line-height: 1.45;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  .sources a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+  }
+  .editorial {
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    background: #f6f4ee;
+    border: 1px solid var(--rule);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 20px 0 0;
+  }
+  footer.colophon {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  footer.colophon a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+  }
+  @media (max-width: 480px) {
+    body { font-size: 17px; }
+    .wrap { padding: 24px 16px 60px; }
+    h1 { font-size: 25px; }
+    article h2 { font-size: 20px; }
+    .lede { font-size: 18px; }
+    .listen-bar { padding: 10px; }
+    .listen-bar button { font-size: 14px; padding: 8px 12px; }
+  }
+</style>
+<style>
+  .part-nav { background:white; border:1px solid var(--rule); border-left:4px solid var(--accent); padding:12px 16px; border-radius:0 6px 6px 0; margin:0 0 28px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-size:14px; color:var(--ink-soft); }
+  .part-nav a { color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent); font-weight:600; }
+  .pullquote { font-family:Georgia,"Times New Roman",serif; font-size:22px; line-height:1.4; font-style:italic; color:var(--ink); border-left:3px solid var(--accent); padding:6px 0 6px 18px; margin:24px 0; }
+  .pullquote cite { display:block; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-size:13px; font-style:normal; color:var(--ink-soft); margin-top:8px; letter-spacing:0.06em; text-transform:uppercase; }
+  @media (max-width:480px) { .pullquote { font-size:19px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="articles.html">← All articles</a>
+  <header class="masthead">
+    <div class="kicker">Update · Part 2 · Justicia y salud mental</div>
+    <h1>El caso Lindsay Clancy — Parte 2: nulidad del juicio</h1>
+    <div class="byline">Jurado dividido 11 a 1 tras 38 horas de deliberación. La defensa habla de un veredicto arrebatado; la fiscalía tiene ahora la decisión más difícil del caso.</div>
+  </header>
+  <div class="part-nav">
+    ← Parte 1: <a href="lindsay-clancy.html">El caso Lindsay Clancy: tragedia familiar, enfermedad mental posparto y responsabilidad penal</a>
+  </div>
+  <div class="listen-bar" role="region" aria-label="Listen to this page">
+    <span class="label">🎧 Listen to this page</span>
+    <button id="tts-play" type="button">▶ Play</button>
+    <button id="tts-pause" type="button" disabled>⏸ Pause</button>
+    <button id="tts-stop" type="button" disabled>⏹ Stop</button>
+    <div id="tts-status" aria-live="polite"></div>
+  </div>
+  <article id="article">
+    <p class="lede">El viernes 4 de septiembre de 2026, el juez William Sullivan declaró la nulidad del juicio contra Lindsay Clancy tras más de 38 horas de deliberación repartidas en una semana. El jurado, compuesto por nueve mujeres y tres hombres, quedó dividido 11 a 1. Según el abogado defensor Kevin Reddington, los once favorecían a Clancy; el juror que discrepaba, dice, no siguió las instrucciones del juez.</p>
+    <h2>Qué ocurrió en la sala</h2>
+    <p>Después de tres regresos sin veredicto, el juez Sullivan declaró la nulidad. En ese momento Reddington, el abogado principal de Clancy, interrumpió la declaración para pedir una hora adicional. Su intención, según reportes públicos posteriores, era preparar una solicitud urgente de suspensión —emergency stay— para preservar el registro procesal y sentar las bases de mociones posteriores.</p>
+    <p>El jurado había pasado más de 38 horas discutiendo un caso de semanas de duración que puso el foco nacional en la salud mental materna. La composición del jurado —nueve mujeres, tres hombres— y el resultado 11 a 1 se conocen a través de las notas entregadas al tribunal.</p>
+    <h2>Un dato que cambia la lectura pública del caso</h2>
+    <p>Un juicio anulado no es una absolución. Pero un juicio anulado con un jurado dividido 11 a 1 a favor de la defensa, en un caso de homicidio de tres niños, no tiene precedente cercano en la memoria reciente estadounidense.</p>
+    <p>Los jurados casi nunca aceptan un argumento de irresponsabilidad penal por enfermedad mental en casos que involucran la muerte de niños. El peso emocional del caso suele imponerse sobre la evidencia psiquiátrica, por sólida que sea. Que once de doce personas hayan concluido que Lindsay Clancy no era penalmente responsable en el momento de los hechos indica que el argumento clínico —trastorno bipolar no diagnosticado, psicosis posparto, polifarmacia y atención fragmentada— fue considerado convincente por prácticamente todo el jurado.</p>
+    <p>Esto convierte a este juicio, aún sin veredicto formal, en un momento significativo dentro de la evolución del tratamiento judicial de la enfermedad mental posparto en Estados Unidos.</p>
+    <h2>La posición pública de la defensa</h2>
+    <p>Kevin Reddington, entrevistado tras la declaración de nulidad, sostuvo que los once jurados a favor de Clancy fueron "arrebatados" de un veredicto por un solo juror que, según él, se negó a seguir las instrucciones del juez sobre cómo aplicar la defensa por enfermedad mental.</p>
+    <div class="pullquote">
+      "Once personas escucharon la evidencia, siguieron la instrucción del juez y llegaron a la misma conclusión. Un juror bloqueó el proceso."
+      <cite>Kevin Reddington · abogado defensor de Lindsay Clancy (parafraseado)</cite>
+    </div>
+    <p>Esta afirmación tiene consecuencias más allá de la retórica. Si Reddington puede sostener con base al registro que el juror discrepante no cumplió con las instrucciones —por prejuicio, por rechazo del marco legal aplicable a la irresponsabilidad penal, o por otras razones— dispondrá de argumentos concretos para presentar mociones posteriores, incluidas eventuales solicitudes de un fallo dirigido de no culpabilidad por enfermedad mental (NGRI, Not Guilty by Reason of Insanity) o de impedimento del nuevo juicio.</p>
+    <h2>Qué puede hacer ahora la fiscalía</h2>
+    <p>Con la nulidad declarada, la Fiscalía del condado de Plymouth tiene ante sí tres caminos principales, y cada uno tiene costos serios.</p>
+    <p><strong>Repetir el juicio.</strong> Es la vía por defecto en casos de alto perfil que terminan en jurado colgado. Pero repetir un juicio en el que el jurado favoreció a la acusada 11 a 1 plantea un problema práctico difícil: ¿de dónde se obtendría un jurado más favorable a la fiscalía que el actual? La cobertura mediática del resultado ya inclina la percepción pública hacia el marco de enfermedad mental posparto. Un segundo juicio, además, expone a la familia y al público a otra ronda del mismo trauma sin garantía de un resultado distinto.</p>
+    <p><strong>Ofrecer un acuerdo.</strong> Podría explorarse una resolución negociada: una declaración de culpabilidad por cargos menores, una sentencia atenuada, o el reconocimiento formal de la defensa por enfermedad mental con internación psiquiátrica. Esta salida evita un segundo juicio y reconoce implícitamente la fuerza del resultado 11 a 1.</p>
+    <p><strong>Retirar los cargos.</strong> Es la opción menos probable de inmediato, pero deja de ser impensable después de un jurado casi unánime a favor de la defensa. En términos de recursos judiciales y probabilidad de condena, sería la lectura fría del resultado.</p>
+    <h2>Qué puede hacer ahora la defensa</h2>
+    <p>Reddington probablemente presentará, en las próximas semanas:</p>
+    <p><strong>Moción para un fallo dirigido de NGRI</strong> (required finding of not guilty by reason of insanity). Basado en el 11 a 1 y en la evidencia psiquiátrica presentada, argumentará que ningún jurado razonable siguiendo las instrucciones podría haber concluido otra cosa.</p>
+    <p><strong>Moción para impedir un nuevo juicio.</strong> Si logra sostener con evidencia que el juror discrepante actuó fuera de las instrucciones, podría argumentar contra un segundo juicio, aunque este tipo de moción es históricamente difícil de ganar.</p>
+    <p><strong>Compromiso civil / hospitalización psiquiátrica.</strong> Independientemente del resultado penal, existe la posibilidad de un internamiento psiquiátrico bajo el marco civil de Massachusetts. Esta ha sido, probablemente, la salida que la defensa ha buscado desde el principio: reconocer la enfermedad, garantizar tratamiento y contención en una institución psiquiátrica estatal, sin condena penal.</p>
+    <h2>Qué significa este resultado para el debate más amplio</h2>
+    <p>El caso Clancy siempre fue más grande que un solo veredicto. Puso a prueba, ante un jurado y ante la opinión pública, si el sistema judicial estadounidense está preparado para tratar la psicosis posparto como lo que la psiquiatría dice que es: una emergencia médica grave, no una falla moral.</p>
+    <p>Once de doce personas dijeron que sí. Eso no es una absolución, pero tampoco es un resultado sin peso. Marca un cambio en cómo los jurados razonan sobre la enfermedad mental materna cuando la evidencia clínica se presenta con seriedad.</p>
+    <p>Al mismo tiempo, el desenlace muestra los límites del sistema. Un solo juror puede bloquear un resultado prácticamente unánime. La fiscalía tiene ahora una decisión política además de jurídica. Y la familia de Patrick Clancy, que perdió a tres hijos y que ha expresado públicamente su apoyo a Lindsay, sigue esperando algún cierre.</p>
+    <p>Nada de esto sucedió hoy. Lo que sucedió hoy es que once personas creyeron y una no. Ahora empieza la parte del proceso donde se decide qué hacer con esa división.</p>
+    <div class="sources">
+      <h2>Fuentes y lecturas adicionales</h2>
+      <ul>
+        <li>Edward Helmore, <a href="https://apple.news/AgGkA9XaRSbmcgak_0iB_dA">"Judge declares mistrial in Lindsay Clancy case after jury deadlocked again"</a>, <em>The Guardian</em>, 4 sep 2026.</li>
+        <li>The Guardian, <a href="https://apple.news/ANDJOWZCyQrqgloGnlfldpw">Lindsay Clancy murder trial: live updates</a>.</li>
+        <li>The Guardian, <a href="https://apple.news/ABiwaTEDzT6mpnlmSbZP-8g">"Lindsay Clancy judge declares mistrial — what happens next?"</a>.</li>
+        <li>Parte 1 de este resumen: <a href="lindsay-clancy.html">El caso Lindsay Clancy: tragedia familiar, enfermedad mental posparto y responsabilidad penal</a>.</li>
+      </ul>
+    </div>
+    <div class="editorial">
+      Nota editorial: este resumen se basa en el reporte de Edward Helmore para <em>The Guardian</em> publicado el 4 de septiembre de 2026 y en declaraciones públicas del abogado defensor Kevin Reddington tras la audiencia. La lectura del resultado 11 a 1 como favorable a la defensa proviene de esas declaraciones. Detalles procesales adicionales podrán actualizarse en un tercer resumen si aparecen desarrollos significativos.
+    </div>
+  </article>
+  <footer class="colophon">
+    <p>Resumen publicado el 4 de septiembre de 2026 en <a href="https://schmidtmarcelo.com">schmidtmarcelo.com</a>. Fuente principal: Edward Helmore, <em>The Guardian</em>. Este material es un resumen editorial en español con fines de comprensión pública; el material original puede estar protegido por derechos de autor de sus autores y publicaciones respectivas.</p>
+  </footer>
+</div>
+<script>
+(function() {
+  const playBtn = document.getElementById('tts-play');
+  const pauseBtn = document.getElementById('tts-pause');
+  const stopBtn = document.getElementById('tts-stop');
+  const status = document.getElementById('tts-status');
+
+  if (!('speechSynthesis' in window)) {
+    playBtn.disabled = true;
+    status.textContent = 'Your browser does not support text-to-speech. Try Safari or Chrome.';
+    return;
+  }
+
+  function buildReadingText() {
+    const article = document.getElementById('article');
+    const clone = article.cloneNode(true);
+    let text = clone.innerText || clone.textContent || '';
+    text = text.replace(/\s+/g, ' ').trim();
+    return text;
+  }
+
+  const fullText = buildReadingText();
+
+  function chunkText(text, maxLen = 220) {
+    const sentences = text.match(/[^.!?]+[.!?]+["')\]]*\s*|.+$/g) || [text];
+    const chunks = [];
+    let buf = '';
+    for (const s of sentences) {
+      if ((buf + s).length > maxLen && buf) {
+        chunks.push(buf.trim());
+        buf = s;
+      } else {
+        buf += s;
+      }
+    }
+    if (buf.trim()) chunks.push(buf.trim());
+    return chunks;
+  }
+
+  const chunks = chunkText(fullText);
+  let isPlaying = false;
+  let isPaused = false;
+
+  function pickVoice() {
+    const voices = speechSynthesis.getVoices();
+    if (!voices.length) return null;
+    const preferred = [
+      /Monica/i, /Mónica/i, /Paulina/i, /Jorge/i,
+      /Google.*es/i,
+      /Microsoft.*(Elvira|Helena|Alvaro|Dalia)/i,
+      /es[-_]ES/i, /es[-_]MX/i, /^es/i,
+      /Samantha/i, /Karen/i, /Daniel/i
+    ];
+    for (const pat of preferred) {
+      const v = voices.find(v => pat.test(v.name) || pat.test(v.lang));
+      if (v) return v;
+    }
+    return voices[0];
+  }
+
+  function speakChunk(index) {
+    if (index >= chunks.length) { finish(); return; }
+    const u = new SpeechSynthesisUtterance(chunks[index]);
+    const v = pickVoice();
+    if (v) u.voice = v;
+    u.rate = 1.0;
+    u.pitch = 1.0;
+    u.lang = 'es-ES';
+    u.onend = () => { if (isPlaying && !isPaused) speakChunk(index + 1); };
+    u.onerror = (e) => { status.textContent = 'Playback error: ' + (e.error || 'unknown'); finish(); };
+    speechSynthesis.speak(u);
+  }
+
+  function play() {
+    if (isPaused) {
+      speechSynthesis.resume();
+      isPaused = false;
+      playBtn.textContent = '▶ Playing…';
+      playBtn.classList.add('playing');
+      status.textContent = 'Reading…';
+      return;
+    }
+    speechSynthesis.cancel();
+    isPlaying = true;
+    isPaused = false;
+    playBtn.textContent = '▶ Playing…';
+    playBtn.classList.add('playing');
+    pauseBtn.disabled = false;
+    stopBtn.disabled = false;
+    status.textContent = 'Reading…';
+    speakChunk(0);
+  }
+
+  function pause() {
+    if (!isPlaying) return;
+    speechSynthesis.pause();
+    isPaused = true;
+    playBtn.textContent = '▶ Resume';
+    playBtn.classList.remove('playing');
+    status.textContent = 'Paused.';
+  }
+
+  function stop() { speechSynthesis.cancel(); finish(); }
+
+  function finish() {
+    isPlaying = false;
+    isPaused = false;
+    playBtn.textContent = '▶ Play';
+    playBtn.classList.remove('playing');
+    pauseBtn.disabled = true;
+    stopBtn.disabled = true;
+    status.textContent = '';
+  }
+
+  playBtn.addEventListener('click', () => { if (isPlaying && !isPaused) return; play(); });
+  pauseBtn.addEventListener('click', pause);
+  stopBtn.addEventListener('click', stop);
+  if (speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = () => {};
+  window.addEventListener('pagehide', () => speechSynthesis.cancel());
+})();
+</script>
+</body>
+</html>
