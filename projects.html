@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Marcelo Schmidt</title>
+<meta name="description" content="Side projects: cast-relay and agent-native-site — two experiments in agent-driven web rendering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0c0c0c; --card:#161616; --card-hover:#1c1c1c;
+    --text:#e8e8e8; --muted:#a0a0a0; --dim:#666;
+    --accent:#4ecdc4; --accent-2:#f0c040; --border:#222;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a { color:var(--accent); }
+  code, pre, .mono {
+    font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    background:rgba(12,12,12,0.85); backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border); padding:1rem 2rem;
+  }
+  nav .nav-inner {
+    max-width:1100px; margin:0 auto; display:flex;
+    justify-content:space-between; align-items:center;
+  }
+  nav .logo { font-weight:700; font-size:1.1rem; letter-spacing:.08em; color:var(--accent); }
+  nav .nav-links a {
+    color:var(--muted); text-decoration:none; margin-left:2rem;
+    font-size:.85rem; font-weight:500; letter-spacing:.03em; transition:color .2s;
+  }
+  nav .nav-links a:hover { color:var(--accent); }
+  @media (max-width:600px){ nav .nav-links a{ margin-left:1rem; font-size:.8rem; } }
+  .wrap { max-width:1000px; margin:0 auto; padding:110px 20px 80px; }
+  .page-tag {
+    font-family:'JetBrains Mono',monospace; font-size:.8rem; color:var(--accent);
+    letter-spacing:.15em; text-transform:uppercase; margin-bottom:1rem;
+  }
+  h1 { font-size:clamp(2rem,4vw,3rem); font-weight:700; letter-spacing:-0.02em; margin-bottom:.75rem; }
+  .lede { color:var(--muted); font-size:1.1rem; max-width:720px; margin-bottom:3rem; }
+  .project {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:16px; padding:2rem 2rem 1.75rem; margin-bottom:2rem;
+    transition:border-color .2s, background .2s;
+  }
+  .project:hover { border-color:#333; background:var(--card-hover); }
+  .project-header {
+    display:flex; align-items:baseline; gap:.75rem; flex-wrap:wrap;
+    margin-bottom:.5rem;
+  }
+  .project-code {
+    font-family:'JetBrains Mono',monospace; font-size:.75rem;
+    padding:.15rem .55rem; border-radius:5px;
+    background:rgba(78,205,196,.12); color:var(--accent);
+    letter-spacing:.1em; text-transform:uppercase; font-weight:500;
+  }
+  .project h2 { font-size:1.4rem; font-weight:600; }
+  .project .subhead { color:var(--dim); font-size:.9rem; margin-bottom:1rem; }
+  .project h3 {
+    font-size:.75rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent); margin:1.5rem 0 .6rem; font-weight:600;
+  }
+  .project p { color:var(--muted); margin-bottom:1rem; font-size:.95rem; }
+  .project ul { color:var(--muted); padding-left:1.2rem; margin-bottom:1rem; font-size:.94rem; }
+  .project li { margin-bottom:.35rem; }
+  .project strong { color:var(--text); font-weight:600; }
+  .project a { text-decoration:none; border-bottom:1px solid rgba(78,205,196,.35); }
+  .project a:hover { border-bottom-color:var(--accent); }
+  .project pre {
+    background:#0a0a0a; border:1px solid var(--border); border-radius:8px;
+    padding:.9rem 1rem; overflow-x:auto; font-size:.82rem; line-height:1.55;
+    color:#d0d0d0; margin-bottom:1rem;
+  }
+  .project code:not(pre code) {
+    background:#0a0a0a; border:1px solid var(--border); border-radius:4px;
+    padding:.1rem .35rem; font-size:.85em; color:#d0d0d0;
+  }
+  .stack { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.75rem; margin-bottom:.5rem; }
+  .stack span {
+    font-family:'JetBrains Mono',monospace; font-size:.7rem;
+    background:#0a0a0a; border:1px solid var(--border); color:var(--muted);
+    padding:.2rem .55rem; border-radius:4px;
+  }
+  .notice {
+    background:rgba(240,192,64,.08); border:1px solid rgba(240,192,64,.3);
+    border-radius:8px; padding:.9rem 1.1rem; margin:1rem 0 1.5rem;
+    color:#d8c48a; font-size:.9rem;
+  }
+  .notice strong { color:var(--accent-2); }
+  .back-home {
+    display:inline-block; margin-top:2rem; padding:.7rem 1.2rem;
+    background:var(--card); border:1px solid var(--border); border-radius:8px;
+    color:var(--text); text-decoration:none; font-size:.9rem; transition:all .2s;
+  }
+  .back-home:hover { border-color:var(--accent); color:var(--accent); }
+  hr.section-rule { border:none; border-top:1px solid var(--border); margin:2rem 0; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <div class="logo">MS</div>
+    <div class="nav-links">
+      <a href="index.html#about">About</a>
+      <a href="music.html">Music</a>
+      <a href="markets.html">Markets</a>
+      <a href="articles.html">Articles</a>
+      <a href="projects.html">Projects</a>
+      <a href="live.html">Live</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-tag">// side projects</div>
+  <h1>Projects</h1>
+  <p class="lede">Two experiments in <strong style="color:var(--text)">agent-driven web rendering</strong> — small pieces of infrastructure that let my AI assistant push rich content to a browser tab in real time, instead of dumping walls of text into a chat window.</p>
+
+  <div class="notice">
+    <strong>Heads up:</strong> both projects are personal sandboxes. The endpoints below work, but authenticated features and the good demos are wired to my own accounts. What you see live is a stripped-down version.
+  </div>
+
+  <!-- ───────── CAST ───────── -->
+  <div class="project">
+    <div class="project-header">
+      <span class="project-code">cast</span>
+      <h2>cast-relay</h2>
+    </div>
+    <div class="subhead">Real-time relay from AI assistant → any browser tab</div>
+
+    <p>Chat is a lousy medium for anything visual. If my assistant wants to show me a product comparison, a chart, a map, or a formatted table, the chat window flattens all of it into a scrolling wall of markdown. <strong>cast-relay</strong> fixes that by giving the assistant a second screen to render into.</p>
+
+    <h3>How it works</h3>
+    <p>The service has three pieces:</p>
+    <ul>
+      <li><strong>Mint endpoint</strong> — <code>POST /api/cast/new</code> returns a short session code like <code>CAST-A7X2</code>.</li>
+      <li><strong>Receiver page</strong> — <code>/cast/CAST-A7X2</code> opened in any browser. This is the "screen." It holds a persistent connection to the relay.</li>
+      <li><strong>Command endpoint</strong> — <code>POST /api/cast/CAST-A7X2/command</code> with a JSON body. Whatever you send is instantly pushed to the receiver and rendered.</li>
+    </ul>
+    <p>The interesting part is the command vocabulary. The receiver knows how to render four command types:</p>
+    <ul>
+      <li><code>loading</code> — animated spinner with a status message.</li>
+      <li><code>open_url</code> — loads a URL in an iframe. (Warning: most big sites block iframe embedding — Amazon, Apple, Garmin, all no.)</li>
+      <li><code>display_html</code> — renders arbitrary HTML/CSS/JS. This is the powerful one.</li>
+      <li><code>search_results</code> — structured list with title, URL, and snippet per result.</li>
+    </ul>
+
+    <h3>The unlock</h3>
+    <p>Because iframe embedding is blocked almost everywhere, the killer pattern is <code>display_html</code>: the assistant fetches the underlying data, applies my personal context (size, budget, location, preferences), and renders a <em>bespoke</em> view in that tab. The proof-of-concept was a four-tab mini-site for Garmin Fenix 8 watch bands — Overview / Options / Comparison / Recommendation — pushed as a single ~13&nbsp;KB HTML payload.</p>
+
+    <h3>How to try it</h3>
+    <p>Mint a code from a shell, then open the receiver in your browser:</p>
+<pre>curl -s -X POST https://cast-relay-two.vercel.app/api/cast/new
+# → { "code": "CAST-A7X2" }
+
+open https://cast-relay-two.vercel.app/cast/CAST-A7X2</pre>
+    <p>Then push a command:</p>
+<pre>curl -s -X POST \
+  https://cast-relay-two.vercel.app/api/cast/CAST-A7X2/command \
+  -H "Content-Type: application/json" \
+  -d '{"type":"display_html","html":"&lt;h1&gt;Hello from the relay&lt;/h1&gt;"}'</pre>
+    <p>The receiver tab updates instantly. If it shows <code>○ disconnected</code>, the tab isn't open or lost focus — reload it.</p>
+
+    <div class="stack">
+      <span>Next.js</span><span>Vercel</span><span>Server-Sent Events</span><span>REST</span>
+    </div>
+    <p><strong>Live:</strong> <a href="https://cast-relay-two.vercel.app" target="_blank">cast-relay-two.vercel.app</a></p>
+  </div>
+
+  <!-- ───────── JSON ───────── -->
+  <div class="project">
+    <div class="project-header">
+      <span class="project-code">json</span>
+      <h2>agent-native-site</h2>
+    </div>
+    <div class="subhead">First agent-deployed Vercel project — the prototype that led to cast</div>
+
+    <p>Before <strong>cast-relay</strong> there was <strong>agent-native-site</strong>. The idea was blunter: what if a website's homepage was just a container the assistant could take over? Instead of a fixed HTML file, the page fetches its own content from a JSON blob the assistant owns. Change the JSON, refresh the page, new site.</p>
+
+    <h3>How it works</h3>
+    <ul>
+      <li><strong>Static Next.js shell</strong> deployed on Vercel.</li>
+      <li>On load, the page fetches a JSON document describing what to render — a hero, a card grid, a list of links, a chart config.</li>
+      <li>The assistant writes to that JSON when it wants the page to change.</li>
+      <li>No database, no CMS — just a versioned JSON blob and a renderer.</li>
+    </ul>
+    <p>This became the mental model for cast-relay. cast just replaced "fetch on load" with "push in real time" and added a session code so multiple screens can each have their own view.</p>
+
+    <h3>How to try it</h3>
+    <p>Open the live URL — it renders whatever's currently in the JSON blob:</p>
+<pre>open https://agent-native-site-silk.vercel.app</pre>
+    <p>The visible content changes whenever the assistant updates the underlying document. You'll get whatever snapshot happens to be there right now.</p>
+
+    <div class="stack">
+      <span>Next.js</span><span>Vercel</span><span>JSON-driven</span>
+    </div>
+    <p><strong>Live:</strong> <a href="https://agent-native-site-silk.vercel.app" target="_blank">agent-native-site-silk.vercel.app</a> · <strong>Created:</strong> May 2026</p>
+  </div>
+
+  <hr class="section-rule">
+
+  <h3 style="color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; margin-bottom:1rem;">Where this is going</h3>
+  <p style="color:var(--muted); font-size:.95rem;">The direction is a small library of reusable card types — product, comparison, chart, checklist, map, decision-tree — described by JSON the receiver can render natively, without the assistant having to ship raw HTML each time. Same idea as an <em>agent-native design system</em>: the assistant emits intent, the receiver renders it well.</p>
+
+  <a class="back-home" href="index.html">← Back home</a>
+</div>
+</body>
+</html>
