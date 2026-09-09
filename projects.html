@@ -104,6 +104,29 @@
   }
   .back-home:hover { border-color:var(--accent); color:var(--accent); }
   hr.section-rule { border:none; border-top:1px solid var(--border); margin:2rem 0; }
+  .jump-menu {
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem;
+    margin-bottom:2.25rem;
+  }
+  @media (max-width:780px){ .jump-menu { grid-template-columns:1fr; } }
+  .jump-card {
+    background:var(--card); border:1px solid var(--border); border-radius:12px;
+    padding:1rem 1.15rem; text-decoration:none; color:var(--text);
+    display:flex; flex-direction:column; gap:.35rem;
+    transition:border-color .2s, background .2s, transform .2s;
+  }
+  .jump-card:hover {
+    border-color:var(--accent); background:var(--card-hover); transform:translateY(-2px);
+  }
+  .jump-card .jump-code {
+    font-family:'JetBrains Mono',monospace; font-size:.7rem;
+    padding:.15rem .5rem; border-radius:5px; align-self:flex-start;
+    background:rgba(78,205,196,.12); color:var(--accent);
+    letter-spacing:.1em; text-transform:uppercase; font-weight:500;
+  }
+  .jump-card .jump-title { font-size:1.02rem; font-weight:600; color:var(--text); }
+  .jump-card .jump-desc { font-size:.82rem; color:var(--muted); line-height:1.5; }
+  html { scroll-padding-top:90px; }
 </style>
 </head>
 <body>
@@ -126,12 +149,30 @@
   <h1>Projects</h1>
   <p class="lede">Three experiments in <strong style="color:var(--text)">agent-native infrastructure</strong> — small pieces of glue that let my AI assistants talk to each other, and render into a real browser tab, instead of trapping everything in chat windows.</p>
 
+  <div class="jump-menu">
+    <a href="#bridge" class="jump-card">
+      <span class="jump-code">bridge</span>
+      <span class="jump-title">chatgpt-natasha-bridge</span>
+      <span class="jump-desc">A private, authenticated relay between ChatGPT and my assistant Natasha — no copy-paste, no shared credentials.</span>
+    </a>
+    <a href="#cast" class="jump-card">
+      <span class="jump-code">cast</span>
+      <span class="jump-title">cast-relay</span>
+      <span class="jump-desc">Real-time relay so my assistant can push rich HTML and charts into any browser tab, instead of walls of chat text.</span>
+    </a>
+    <a href="#json" class="jump-card">
+      <span class="jump-code">json</span>
+      <span class="jump-title">agent-native-site</span>
+      <span class="jump-desc">A Vercel-hosted homepage whose entire content is a JSON blob the assistant can rewrite — the prototype that led to cast.</span>
+    </a>
+  </div>
+
   <div class="notice">
-    <strong>Heads up:</strong> both projects are personal sandboxes. The endpoints below work, but authenticated features and the good demos are wired to my own accounts. What you see live is a stripped-down version.
+    <strong>Heads up:</strong> these are personal sandboxes. Endpoints below work, but authenticated features and the good demos are wired to my own accounts. What you see live is a stripped-down version.
   </div>
 
   <!-- ───────── BRIDGE ───────── -->
-  <div class="project">
+  <div class="project" id="bridge">
     <div class="project-header">
       <span class="project-code">bridge</span>
       <h2>chatgpt-natasha-bridge</h2>
@@ -208,7 +249,7 @@
   </div>
 
   <!-- ───────── CAST ───────── -->
-  <div class="project">
+  <div class="project" id="cast">
     <div class="project-header">
       <span class="project-code">cast</span>
       <h2>cast-relay</h2>
@@ -255,7 +296,7 @@ open https://cast-relay-two.vercel.app/cast/CAST-A7X2</pre>
   </div>
 
   <!-- ───────── JSON ───────── -->
-  <div class="project">
+  <div class="project" id="json">
     <div class="project-header">
       <span class="project-code">json</span>
       <h2>agent-native-site</h2>
