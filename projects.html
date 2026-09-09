@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects — Marcelo Schmidt</title>
-<meta name="description" content="Side projects: cast-relay and agent-native-site — two experiments in agent-driven web rendering.">
+<meta name="description" content="Side projects: chatgpt-natasha-bridge, cast-relay, and agent-native-site — experiments in agent-native infrastructure.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -124,10 +124,87 @@
 <div class="wrap">
   <div class="page-tag">// side projects</div>
   <h1>Projects</h1>
-  <p class="lede">Two experiments in <strong style="color:var(--text)">agent-driven web rendering</strong> — small pieces of infrastructure that let my AI assistant push rich content to a browser tab in real time, instead of dumping walls of text into a chat window.</p>
+  <p class="lede">Three experiments in <strong style="color:var(--text)">agent-native infrastructure</strong> — small pieces of glue that let my AI assistants talk to each other, and render into a real browser tab, instead of trapping everything in chat windows.</p>
 
   <div class="notice">
     <strong>Heads up:</strong> both projects are personal sandboxes. The endpoints below work, but authenticated features and the good demos are wired to my own accounts. What you see live is a stripped-down version.
+  </div>
+
+  <!-- ───────── BRIDGE ───────── -->
+  <div class="project">
+    <div class="project-header">
+      <span class="project-code">bridge</span>
+      <h2>chatgpt-natasha-bridge</h2>
+    </div>
+    <div class="subhead">A private, authenticated relay between two AI agents — ChatGPT and my personal assistant</div>
+
+    <p>I have two AI assistants I talk to constantly. <strong>ChatGPT</strong> is where I brainstorm, research, and think out loud. <strong>Natasha</strong> is my personal assistant on OpenClaw — she has my finances, my calendar, my health records, my house context. Until this project the only bridge between them was <em>me</em>: copy from one window, paste into the other, retype the question, repeat. That's slow and lossy.</p>
+
+    <p>The goal was a <strong>secure, low-friction channel</strong> so ChatGPT can hand a task or question directly to Natasha, and Natasha's answer lands in a place I already read (my Telegram). No sharing of accounts. No exposed secrets. No copy-paste.</p>
+
+    <figure style="margin:1.5rem 0; text-align:center;">
+      <img src="media/chatgpt-natasha-bridge.svg" alt="A real exchange between ChatGPT (left) and Natasha on Telegram (right) — the bridge in action" style="max-width:100%; height:auto; border:1px solid var(--border); border-radius:12px; background:#0a0a0a;">
+      <figcaption style="color:var(--dim); font-size:.8rem; font-family:'JetBrains Mono',monospace; margin-top:.6rem;">a real exchange — ChatGPT Custom GPT ⇄ Natasha via the bridge, 09 Sep 2026</figcaption>
+    </figure>
+
+    <h3>Architecture</h3>
+    <p>Five moving parts, each doing one thing:</p>
+    <ul>
+      <li><strong>ChatGPT Custom GPT</strong> — a private GPT called <em>Natasha Relay</em>. Its only tool is a single OpenAPI Action, <code>sendToNatasha</code>, protected by a Bearer token.</li>
+      <li><strong>ngrok tunnel</strong> — gives the bridge a stable public HTTPS URL (<code>*.ngrok-free.dev</code>) so ChatGPT's server can reach the box behind NAT.</li>
+      <li><strong>FastAPI service (bridge.py)</strong> — a ~70-line Python service. Validates the Bearer token, accepts <code>POST /send {"text": "..."}</code>, prepends the <code>[via ChatGPT]</code> marker, and hands off to Telethon.</li>
+      <li><strong>Telethon (MTProto user client)</strong> — signs in as me on Telegram using a saved session string, DMs the marked message to my Natasha bot.</li>
+      <li><strong>Natasha on OpenClaw</strong> — reads the DM like any other Telegram message. The <code>[via ChatGPT]</code> prefix tells her the request originated from the other agent, not from me directly.</li>
+    </ul>
+
+    <h3>Security model</h3>
+    <ul>
+      <li><strong>Bearer authentication</strong> — every request needs a 43-character random API key. Anyone hitting the public URL without it gets <code>401</code>.</li>
+      <li><strong>Encrypted transport</strong> — HTTPS end to end (ChatGPT → ngrok → localhost).</li>
+      <li><strong>No shared credentials</strong> — ChatGPT never sees my Telegram password, my 2FA, or my session token. It only holds the Bearer key for the bridge.</li>
+      <li><strong>Marker prefix</strong> — every relayed message is prefixed <code>[via ChatGPT]</code> so Natasha (and I) always know when a request came through the bridge instead of directly from me. Detectable provenance.</li>
+      <li><strong>Least privilege</strong> — the bridge only knows how to <em>send</em>. It can't read my chats, my files, or run commands. If the key leaks, the worst case is spam into a single bot's DM channel.</li>
+      <li><strong>Session string, not password</strong> — Telethon logs in once interactively with a phone code + 2FA, then persists a <em>session string</em>. The 2FA password is deleted from disk afterward. If the session string is ever exposed I can revoke it from Telegram → Settings → Devices.</li>
+    </ul>
+
+    <h3>Stack</h3>
+    <div class="stack">
+      <span>Python 3.12</span><span>FastAPI</span><span>Uvicorn</span><span>Telethon (MTProto)</span><span>ngrok</span><span>Pydantic</span><span>OpenAPI 3.1</span><span>ChatGPT Custom GPT Action</span><span>Systemd-style supervisor + cron</span>
+    </div>
+
+    <h3>The exchange, end to end</h3>
+<pre>1.  Me → ChatGPT (Natasha Relay GPT):
+    "Tell Natasha the bridge works"
+
+2.  ChatGPT → decides to call sendToNatasha
+    POST https://&lt;public&gt;.ngrok-free.dev/send
+    Authorization: Bearer &lt;43-char key&gt;
+    { "text": "The bridge works." }
+
+3.  bridge.py → validates key, prepends marker,
+    hands text to Telethon → sends as DM.
+
+4.  Telegram delivers to Natasha:
+    [via ChatGPT] The bridge works.
+
+5.  Natasha replies. I see the answer in Telegram.</pre>
+
+    <h3>Why it took longer than it should have</h3>
+    <p>Estimated at ~1 hour. Took two days. The blocker was Telegram's own anti-phishing protection: when you're logging Telethon into an account, Telegram emits a 5-digit login code — and if it ever sees those digits sent <em>as a message from your own account</em>, it auto-invalidates the login while still returning "success" to the API. I was pasting the code back to Natasha via Telegram to relay it into the login script. Same account → self-triggered lockout, silently, every attempt.</p>
+    <p>The fix was obvious in hindsight: send the code through <strong>any channel that isn't Telegram</strong>. We used email — I sent the 5 digits to Gmail, Natasha read via IMAP, submitted to Telethon in ~5 seconds. First try worked. Documented so I never lose those two days again.</p>
+
+    <h3>Resilience</h3>
+    <ul>
+      <li>Both bridge and ngrok run under a small supervisor script.</li>
+      <li>A cron job runs the supervisor every 2 minutes — restarts anything that died.</li>
+      <li>Session string persists across reboots. No re-auth unless I explicitly revoke.</li>
+      <li>Logs at <code>/home/ubuntu/chatgpt-bridge/{bridge,ngrok,supervisor}.log</code>.</li>
+    </ul>
+
+    <div class="stack">
+      <span>Runs on OpenClaw host</span><span>Cost: $0/mo</span><span>Self-healing</span>
+    </div>
+    <p><strong>Public URL:</strong> reachable but returns <code>401</code> without the key. Ping me if you want to try it against your own agent — happy to share the OpenAPI schema. <a href="mailto:marceloschmidt2112@gmail.com">marceloschmidt2112@gmail.com</a></p>
   </div>
 
   <!-- ───────── CAST ───────── -->

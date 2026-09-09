@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600" font-family="-apple-system,BlinkMacSystemFont,'Inter',sans-serif">
+  <!-- background -->
+  <rect width="1100" height="600" fill="#0c0c0c"/>
+
+  <!-- LEFT: ChatGPT window -->
+  <g transform="translate(30,30)">
+    <rect width="480" height="540" rx="18" fill="#171717" stroke="#2a2a2a"/>
+    <!-- window chrome -->
+    <circle cx="22" cy="22" r="6" fill="#ff5f56"/>
+    <circle cx="42" cy="22" r="6" fill="#ffbd2e"/>
+    <circle cx="62" cy="22" r="6" fill="#27c93f"/>
+    <text x="240" y="27" fill="#666" font-size="12" text-anchor="middle">ChatGPT · Natasha Relay</text>
+    <line x1="0" y1="46" x2="480" y2="46" stroke="#232323"/>
+
+    <!-- GPT header -->
+    <g transform="translate(24,64)">
+      <circle cx="18" cy="18" r="18" fill="#10a37f"/>
+      <text x="18" y="24" fill="white" font-size="17" font-weight="600" text-anchor="middle">N</text>
+      <text x="46" y="16" fill="#e8e8e8" font-size="15" font-weight="600">Natasha Relay</text>
+      <text x="46" y="34" fill="#888" font-size="11">Private · Only me · GPT-4</text>
+    </g>
+
+    <!-- user bubble 1 -->
+    <g transform="translate(80,124)">
+      <rect x="0" y="0" width="360" height="52" rx="14" fill="#2b2b2b"/>
+      <text x="18" y="22" fill="#e8e8e8" font-size="13" font-weight="500">Marcelo</text>
+      <text x="18" y="42" fill="#c8c8c8" font-size="13">Tell Natasha the bridge works</text>
+    </g>
+
+    <!-- Assistant reply -->
+    <g transform="translate(24,196)">
+      <circle cx="18" cy="18" r="18" fill="#10a37f"/>
+      <text x="18" y="24" fill="white" font-size="15" font-weight="600" text-anchor="middle">N</text>
+      <rect x="46" y="0" width="394" height="90" rx="14" fill="#212121"/>
+      <text x="66" y="22" fill="#e8e8e8" font-size="13" font-weight="500">Natasha Relay</text>
+      <text x="66" y="44" fill="#c8c8c8" font-size="12.5">→ Calling sendToNatasha …</text>
+      <text x="66" y="62" fill="#4ecdc4" font-size="12.5" font-family="'JetBrains Mono',monospace">POST /send  200 OK</text>
+      <text x="66" y="80" fill="#c8c8c8" font-size="12.5">Delivered to Natasha. ✓</text>
+    </g>
+
+    <!-- input box -->
+    <g transform="translate(24,472)">
+      <rect x="0" y="0" width="432" height="42" rx="21" fill="#2b2b2b" stroke="#333"/>
+      <text x="20" y="27" fill="#666" font-size="13">Ask ChatGPT…</text>
+    </g>
+  </g>
+
+  <!-- ARROW between panels -->
+  <g transform="translate(510,290)">
+    <path d="M 0 10 L 60 10" stroke="#4ecdc4" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+    <text x="30" y="0" fill="#4ecdc4" font-size="11" font-family="'JetBrains Mono',monospace" text-anchor="middle">HTTPS</text>
+    <text x="30" y="30" fill="#888" font-size="10" font-family="'JetBrains Mono',monospace" text-anchor="middle">Bearer + ngrok</text>
+  </g>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4ecdc4"/>
+    </marker>
+  </defs>
+
+  <!-- RIGHT: Telegram window -->
+  <g transform="translate(590,30)">
+    <rect width="480" height="540" rx="18" fill="#17212b" stroke="#2a2a2a"/>
+    <!-- header -->
+    <rect x="0" y="0" width="480" height="52" rx="18" fill="#17212b"/>
+    <rect x="0" y="34" width="480" height="18" fill="#17212b"/>
+    <line x1="0" y1="52" x2="480" y2="52" stroke="#0e1621"/>
+    <circle cx="30" cy="26" r="16" fill="#f0c040"/>
+    <text x="30" y="32" fill="#17212b" font-size="16" font-weight="700" text-anchor="middle">🧮</text>
+    <text x="56" y="22" fill="#e8e8e8" font-size="14" font-weight="600">Natasha</text>
+    <text x="56" y="38" fill="#7d8b9a" font-size="11">online · financial brain</text>
+
+    <!-- date pill -->
+    <g transform="translate(220,72)">
+      <rect x="0" y="0" width="60" height="18" rx="9" fill="#182533"/>
+      <text x="30" y="12.5" fill="#7d8b9a" font-size="10" text-anchor="middle">Today</text>
+    </g>
+
+    <!-- incoming message from Marcelo -->
+    <g transform="translate(24,104)">
+      <rect x="0" y="0" width="230" height="40" rx="12" fill="#182533"/>
+      <text x="15" y="24" fill="#4ecdc4" font-size="10" font-family="'JetBrains Mono',monospace">[via ChatGPT]</text>
+      <text x="118" y="24" fill="#e8e8e8" font-size="12.5">The bridge works.</text>
+      <text x="215" y="36" fill="#5d6d7e" font-size="9" text-anchor="end">09:55 ✓✓</text>
+    </g>
+
+    <!-- Natasha reply -->
+    <g transform="translate(140,158)">
+      <rect x="0" y="0" width="316" height="88" rx="12" fill="#2b5278"/>
+      <text x="14" y="20" fill="#f0c040" font-size="12" font-weight="600">🎉 end-to-end confirmed</text>
+      <text x="14" y="40" fill="#e8e8e8" font-size="12">ChatGPT → OpenAI → ngrok →</text>
+      <text x="14" y="56" fill="#e8e8e8" font-size="12">bridge.py → Telethon → Telegram</text>
+      <text x="14" y="76" fill="#c8c8c8" font-size="11" font-style="italic">Full loop working. The bridge is permanent.</text>
+      <text x="304" y="80" fill="#a4c8e1" font-size="9" text-anchor="end">09:55 ✓</text>
+    </g>
+
+    <!-- follow-up incoming -->
+    <g transform="translate(24,266)">
+      <rect x="0" y="0" width="340" height="42" rx="12" fill="#182533"/>
+      <text x="15" y="20" fill="#4ecdc4" font-size="10" font-family="'JetBrains Mono',monospace">[via ChatGPT]</text>
+      <text x="118" y="20" fill="#e8e8e8" font-size="12.5">What do I need to do with Mike today?</text>
+      <text x="325" y="36" fill="#5d6d7e" font-size="9" text-anchor="end">09:56 ✓✓</text>
+    </g>
+
+    <!-- Natasha long reply -->
+    <g transform="translate(24,322)">
+      <rect x="0" y="0" width="432" height="128" rx="12" fill="#2b5278"/>
+      <text x="14" y="20" fill="#f0c040" font-size="12" font-weight="600">Today with Mike (Wed Sep 9):</text>
+      <text x="14" y="42" fill="#e8e8e8" font-size="12">• 17:00 — Estoril Tennis Club.</text>
+      <text x="14" y="58" fill="#a4c8e1" font-size="11">   Grab rackets, shoes, water. Leave ~16:30.</text>
+      <text x="14" y="82" fill="#c8c8c8" font-size="11">Tomorrow: 20:00 Racket Pro QdaM.</text>
+      <text x="14" y="104" fill="#c8c8c8" font-size="11" font-style="italic">Anything else — groceries, activity ideas?</text>
+      <text x="420" y="120" fill="#a4c8e1" font-size="9" text-anchor="end">09:56 ✓</text>
+    </g>
+
+    <!-- input box -->
+    <g transform="translate(24,472)">
+      <rect x="0" y="0" width="432" height="42" rx="21" fill="#242f3d"/>
+      <text x="20" y="27" fill="#5d6d7e" font-size="13">Message</text>
+    </g>
+  </g>
+
+  <!-- caption -->
+  <text x="550" y="590" fill="#666" font-size="11" text-anchor="middle" font-family="'JetBrains Mono',monospace">a real exchange · 09 Sep 2026 · ChatGPT Custom GPT ⇄ Natasha on Telegram</text>
+</svg>
