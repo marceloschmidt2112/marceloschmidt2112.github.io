@@ -275,6 +275,17 @@
         <span style="color:var(--text)">+5 bp</span> means the yield rose by 0.05%.
         Red = yields rose that day (bad for existing bond holders and for mortgage rates);
         teal = yields fell.
+        <br><br>
+        <strong>About the 3M yield in the spread.</strong> Yahoo publishes <code>^IRX</code> as a
+        <em>discount yield</em> (360-day year, quoted off face value) — the old T-bill market
+        convention. Coupon Treasuries like the 30Y are quoted as a <em>bond-equivalent yield</em>
+        (365-day year, based on price paid). To compute the curve steepness on an apples-to-apples
+        basis, the 3M is converted from discount to BEY before subtracting from the 30Y — the same
+        thing Bloomberg and the US Treasury Bulletin do. Formula:
+        <code>BEY = (365 &times; d) / (360 &minus; d &times; 90)</code>, with <code>d</code> as a
+        decimal. At current levels this adds about <span style="color:var(--text)">+9 bp</span>
+        to the reported 3M and therefore <em>narrows</em> the 30Y–3M spread by roughly the same
+        amount vs. a naive subtraction.
     </div>
 </div>
 
@@ -414,6 +425,19 @@ async function loadTreasuries() {
         svg.innerHTML = g;
     }
 
+    // Convert a 3-month T-bill DISCOUNT yield (Yahoo ^IRX convention, 360-day, face value)
+    // into a BOND-EQUIVALENT YIELD (BEY): 365-day, based on price paid.
+    // Formula: BEY = (365 * d) / (360 - d * 90), with d as a decimal.
+    // This is the same conversion Bloomberg and the US Treasury Bulletin apply so a
+    // T-bill can be compared apples-to-apples against coupon Treasuries (5Y/10Y/30Y).
+    function discountToBEY(d_pct) {
+        if (d_pct == null) return null;
+        const d = d_pct / 100;
+        const denom = 360 - d * 90;
+        if (denom <= 0) return d_pct; // safety: fall back to raw value on garbage input
+        return (365 * d) / denom * 100;
+    }
+
     function drawSpread(instruments) {
         const svg   = document.getElementById('spread');
         const nowEl = document.getElementById('spread-now');
@@ -424,8 +448,10 @@ async function loadTreasuries() {
         const long  = instruments.find(i => i.symbol === '^TYX');
         if (!short || !long || short.error || long.error) return;
 
-        // Spread series: for every date where BOTH have a close, (30Y - 3M) in basis points.
-        const shortMap = new Map(short.history.map(h => [h.t, h.y]));
+        // Spread series: for every date where BOTH have a close, (30Y - 3M_BEY) in basis points.
+        // The 3M is converted from discount yield to bond-equivalent yield first so we're
+        // comparing like with like against the 30Y coupon yield.
+        const shortMap = new Map(short.history.map(h => [h.t, discountToBEY(h.y)]));
         const series = [];
         for (const h of long.history) {
             const s = shortMap.get(h.t);
