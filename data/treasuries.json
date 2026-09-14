@@ -1,25 +1,17 @@
 {
-  "updated": "2026-09-11T08:31:19+00:00",
+  "updated": "2026-09-14T22:30:08+00:00",
   "source": "Yahoo Finance (query1.finance.yahoo.com)",
   "instruments": [
     {
       "symbol": "^IRX",
       "name": "3-Month T-Bill",
       "why": "Closely tracks Fed policy and cash yields.",
-      "last": 3.845,
-      "prev_close": 3.805,
-      "change_bp": 4.0,
+      "last": 3.935,
+      "prev_close": 3.913,
+      "change_bp": 2.2,
       "range_low": 3.557,
-      "range_high": 3.845,
+      "range_high": 3.935,
       "history": [
-        {
-          "t": 1773663600,
-          "y": 3.605
-        },
-        {
-          "t": 1773750000,
-          "y": 3.605
-        },
         {
           "t": 1773836400,
           "y": 3.61
@@ -507,9 +499,17 @@
         {
           "t": 1789042800,
           "y": 3.845
+        },
+        {
+          "t": 1789129200,
+          "y": 3.913
+        },
+        {
+          "t": 1789388400,
+          "y": 3.935
         }
       ],
-      "regular_market_time": 1789066794,
+      "regular_market_time": 1789412392,
       "currency": "USD",
       "exchange": "CGI"
     },
@@ -517,20 +517,12 @@
       "symbol": "^FVX",
       "name": "5-Year Treasury",
       "why": "Sensitive to medium-term rate expectations.",
-      "last": 4.733,
-      "prev_close": 4.614,
-      "change_bp": 11.9,
-      "range_low": 3.786,
-      "range_high": 4.733,
+      "last": 4.79,
+      "prev_close": 4.791,
+      "change_bp": -0.1,
+      "range_low": 3.838,
+      "range_high": 4.791,
       "history": [
-        {
-          "t": 1773663600,
-          "y": 3.803
-        },
-        {
-          "t": 1773750000,
-          "y": 3.786
-        },
         {
           "t": 1773836400,
           "y": 3.862
@@ -1018,9 +1010,17 @@
         {
           "t": 1789042800,
           "y": 4.733
+        },
+        {
+          "t": 1789129200,
+          "y": 4.791
+        },
+        {
+          "t": 1789388400,
+          "y": 4.79
         }
       ],
-      "regular_market_time": 1789066794,
+      "regular_market_time": 1789412392,
       "currency": "USD",
       "exchange": "CGI"
     },
@@ -1028,20 +1028,12 @@
       "symbol": "^TNX",
       "name": "10-Year Treasury",
       "why": "Most important benchmark for mortgages, valuations, and the economy.",
-      "last": 4.944,
-      "prev_close": 4.837,
-      "change_bp": 10.7,
-      "range_low": 4.202,
-      "range_high": 4.944,
+      "last": 4.961,
+      "prev_close": 4.975,
+      "change_bp": -1.4,
+      "range_low": 4.246,
+      "range_high": 4.975,
       "history": [
-        {
-          "t": 1773663600,
-          "y": 4.22
-        },
-        {
-          "t": 1773750000,
-          "y": 4.202
-        },
         {
           "t": 1773836400,
           "y": 4.259
@@ -1529,9 +1521,17 @@
         {
           "t": 1789042800,
           "y": 4.944
+        },
+        {
+          "t": 1789129200,
+          "y": 4.975
+        },
+        {
+          "t": 1789388400,
+          "y": 4.961
         }
       ],
-      "regular_market_time": 1789066794,
+      "regular_market_time": 1789412392,
       "currency": "USD",
       "exchange": "CGI"
     },
@@ -1539,20 +1539,12 @@
       "symbol": "^TYX",
       "name": "30-Year Treasury",
       "why": "Long-term inflation and government debt expectations.",
-      "last": 5.361,
-      "prev_close": 5.286,
-      "change_bp": 7.5,
+      "last": 5.329,
+      "prev_close": 5.354,
+      "change_bp": -2.5,
       "range_low": 4.852,
       "range_high": 5.361,
       "history": [
-        {
-          "t": 1773663600,
-          "y": 4.859
-        },
-        {
-          "t": 1773750000,
-          "y": 4.852
-        },
         {
           "t": 1773836400,
           "y": 4.881
@@ -2040,9 +2032,17 @@
         {
           "t": 1789042800,
           "y": 5.361
+        },
+        {
+          "t": 1789129200,
+          "y": 5.354
+        },
+        {
+          "t": 1789388400,
+          "y": 5.329
         }
       ],
-      "regular_market_time": 1789066794,
+      "regular_market_time": 1789412392,
       "currency": "USD",
       "exchange": "CGI"
     }
