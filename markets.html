@@ -282,10 +282,9 @@
         (365-day year, based on price paid). To compute the curve steepness on an apples-to-apples
         basis, the 3M is converted from discount to BEY before subtracting from the 30Y — the same
         thing Bloomberg and the US Treasury Bulletin do. Formula:
-        <code>BEY = (365 &times; d) / (360 &minus; d &times; 90)</code>, with <code>d</code> as a
-        decimal. At current levels this adds about <span style="color:var(--text)">+9 bp</span>
-        to the reported 3M and therefore <em>narrows</em> the 30Y–3M spread by roughly the same
-        amount vs. a naive subtraction.
+        <code>BEY = (365 &times; d) / (360 &minus; d &times; 91)</code>, with <code>d</code> as a
+        decimal. The conversion uplift varies with the rate level and narrows the 30Y–3M spread
+        vs. a naive subtraction.
     </div>
 </div>
 
@@ -427,13 +426,13 @@ async function loadTreasuries() {
 
     // Convert a 3-month T-bill DISCOUNT yield (Yahoo ^IRX convention, 360-day, face value)
     // into a BOND-EQUIVALENT YIELD (BEY): 365-day, based on price paid.
-    // Formula: BEY = (365 * d) / (360 - d * 90), with d as a decimal.
+    // Formula: BEY = (365 * d) / (360 - d * 91), with d as a decimal.
     // This is the same conversion Bloomberg and the US Treasury Bulletin apply so a
     // T-bill can be compared apples-to-apples against coupon Treasuries (5Y/10Y/30Y).
     function discountToBEY(d_pct) {
         if (d_pct == null) return null;
         const d = d_pct / 100;
-        const denom = 360 - d * 90;
+        const denom = 360 - d * 91;
         if (denom <= 0) return d_pct; // safety: fall back to raw value on garbage input
         return (365 * d) / denom * 100;
     }
