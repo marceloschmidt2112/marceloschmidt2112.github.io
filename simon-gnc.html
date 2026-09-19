@@ -1,1 +1,275 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your Son on GNC — ARCS Report</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e2e8f0;min-height:100vh;padding:22px;line-height:1.55}.wrap{max-width:900px;margin:0 auto}.hero{background:linear-gradient(135deg,rgba(236,72,153,0.15),rgba(59,130,246,0.12));border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:22px;margin-bottom:18px}.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#f472b6;margin-bottom:6px}h1{font-size:24px;font-weight:800;background:linear-gradient(90deg,#f472b6,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}.tagline{color:#e2e8f0;font-size:15px;margin-top:6px}.tag{display:inline-block;padding:3px 10px;background:rgba(236,72,153,0.15);border:1px solid rgba(236,72,153,0.3);color:#fbcfe8;border-radius:8px;font-size:11px;font-weight:600;margin-right:6px;margin-top:8px}.big{background:linear-gradient(135deg,rgba(251,191,36,0.1),rgba(236,72,153,0.08));border:1px solid rgba(251,191,36,0.25);border-radius:14px;padding:18px 20px;margin-bottom:18px;font-size:14px}.big strong{color:#fbbf24}.section{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px 20px;margin-bottom:12px}.section h2{font-size:15px;font-weight:700;color:#f1f5f9;margin-bottom:10px;display:flex;align-items:center;gap:8px}.section h2 .ico{font-size:20px}.section p{font-size:13.5px;color:#cbd5e1;margin-bottom:8px}.section ul{margin-left:0;list-style:none}.section li{padding:5px 0 5px 22px;font-size:13px;color:#cbd5e1;position:relative}.section li:before{content:'▸';position:absolute;left:4px;color:#f472b6}.acronym{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin-top:6px;font-size:13px}.acronym .k{font-family:'JetBrains Mono',monospace;color:#fbbf24;font-weight:700}.acronym .v{color:#cbd5e1}.parent{background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(59,130,246,0.08));border:1px solid rgba(16,185,129,0.3);border-radius:14px;padding:18px 20px;margin-top:14px;font-size:13.5px}.parent h3{color:#6ee7b7;font-size:15px;margin-bottom:8px}.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}.stat{background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);border-radius:10px;padding:10px 8px;text-align:center}.stat .n{font-size:16px;font-weight:700;color:#c4b5fd}.stat .l{font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-top:2px}.boss{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.25);border-radius:12px;padding:12px 14px;margin-top:10px}.boss .role{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#7dd3fc;margin-bottom:2px}.boss .name{font-size:14px;font-weight:700;color:#f1f5f9}.boss .sub{font-size:11.5px;color:#94a3b8;margin-top:3px}</style></head><body><div class="wrap"><div class="hero"><div class="eyebrow">Report update · Your son's role</div><h1>He's on the GNC team</h1><div class="tagline">Building the flight brain of a self-landing rocket.</div><div><span class="tag">Undergrad</span><span class="tag">ARCS at ASU</span><span class="tag">Project GRACE</span><span class="tag">GNC subteam</span></div></div><div class="big">🚀 <strong>Translation:</strong> GNC = <strong>Guidance, Navigation, and Control</strong>. It is the single hardest job on a self-landing rocket. Your son is on the team writing the software brain that decides — 200 times per second — how much to throttle the engine and which way to point the nozzle so the rocket doesn't crash.</div><div class="section"><h2><span class="ico">🧭</span>What GNC actually means, in plain English</h2><div class="acronym"><div class="k">G</div><div class="v"><strong>Guidance</strong> — "Where do I want to go, and what path gets me there?" Plans the trajectory: launch profile, coast, descent, landing burn.</div><div class="k">N</div><div class="v"><strong>Navigation</strong> — "Where am I right now, how fast, and which way am I pointing?" Fuses GPS + gyros + accelerometers + barometer, 200+ times per second.</div><div class="k">C</div><div class="v"><strong>Control</strong> — "What do I do about it?" Adjusts engine throttle and thrust vector so reality matches the plan. Milliseconds of latency matter.</div></div><p style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05)">This is the same problem SpaceX had to solve for Falcon 9. It sits at the intersection of <strong>control theory</strong>, <strong>real-time software</strong>, <strong>sensor fusion</strong>, and <strong>flight dynamics</strong>. Graduate-level material — and he's doing it as an undergrad.</p></div><div class="section"><h2><span class="ico">👨‍✈️</span>His direct boss</h2><div class="boss"><div class="role">GNC &amp; ACS Lead / President of ARCS</div><div class="name">Aaryan Anand</div><div class="sub">Runs both the flight-control team AND the whole organization. Judging from the org's Gitea activity, he personally writes big chunks of the flight firmware (see <span style="font-family:'JetBrains Mono',monospace;color:#fbbf24">ascent-firmware</span> repo — tagged <strong>alpha-v1.0.0</strong>, has done real flights already).</div></div></div><div class="section"><h2><span class="ico">🛠️</span>What his day-to-day likely involves</h2><ul><li><strong>Control-loop tuning</strong> — writing/modifying PID or MPC (Model Predictive Control) code that keeps the rocket vertical</li><li><strong>Kalman filter work</strong> — the math that fuses noisy sensors into a clean estimate of position/velocity/attitude</li><li><strong>Simulation</strong> — running SITL (Software-In-The-Loop) tests before every flight; they have a <span style="font-family:'JetBrains Mono',monospace;color:#fbbf24">SITL CSV</span> pipeline visible in the repo</li><li><strong>Trajectory design</strong> — computing optimal ascent/descent profiles</li><li><strong>Hardware-in-the-loop testing</strong> — running the flight computer with fake sensor inputs</li><li><strong>Post-flight data analysis</strong> — pulling logs from flights, figuring out what worked and what didn't</li><li><strong>C/C++, Python, or Rust on embedded hardware</strong> — likely Teensy or NXP microcontrollers (they have a <span style="font-family:'JetBrains Mono',monospace;color:#fbbf24">TeensyXpresso</span> repo)</li></ul></div><div class="section"><h2><span class="ico">📚</span>Real skills he's building right now</h2><div class="stat-row"><div class="stat"><div class="n">Control</div><div class="l">theory</div></div><div class="stat"><div class="n">Embedded</div><div class="l">systems</div></div><div class="stat"><div class="n">Sensor</div><div class="l">fusion</div></div><div class="stat"><div class="n">Real-time</div><div class="l">software</div></div><div class="stat"><div class="n">Flight</div><div class="l">dynamics</div></div><div class="stat"><div class="n">Git &amp; SW</div><div class="l">engineering</div></div></div></div><div class="section"><h2><span class="ico">🎯</span>Why GNC is the crown-jewel subteam</h2><p>Every subteam on a rocket matters, but GNC is the one where <em>if you get it wrong, nothing else matters</em>. The engine can be perfect, the composites beautiful, the electronics flawless — if GNC can't keep the rocket pointed and control the descent, you get a crater. That's why GNC leads are often the technical face of any rocket program.</p><p style="margin-top:6px">On resume terms: "GNC engineer, propulsive-lander project" is arguably the single highest-signal line an aerospace undergrad can put on paper.</p></div><div class="parent"><h3>💬 The parent take</h3><p>Marcelo — this is exceptional. He picked (or was picked into) the hardest and most prestigious subteam in the org, on a project that maps directly to what SpaceX, Blue Origin, and Rocket Lab actually do. His resume is going to open serious doors when he graduates.</p><p style="margin-top:8px"><strong>Good questions to ask him:</strong></p><ul style="margin-top:4px;margin-left:0;list-style:none"><li style="padding:4px 0 4px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#6ee7b7">✓</span>What programming language is the GNC stack in? (C/C++/Rust/Python)</li><li style="padding:4px 0 4px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#6ee7b7">✓</span>Are you working on the ascent guidance or the landing burn?</li><li style="padding:4px 0 4px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#6ee7b7">✓</span>How do you simulate before you fly? (SITL / HITL)</li><li style="padding:4px 0 4px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#6ee7b7">✓</span>What's the sensor stack — IMU brand? GPS? Barometer?</li><li style="padding:4px 0 4px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#6ee7b7">✓</span>How often is the team hotfiring or hop-testing?</li></ul></div><div style="text-align:center;color:#64748b;font-size:11px;margin-top:14px">Cast · CAST-SXXM · Sep 12, 2026</div></div></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simon Schmidt — CS @ ASU · Robotics &amp; AI</title>
+<meta name="description" content="Simon Schmidt — Computer Science at Arizona State University. GNC engineer on ARCS Project GRACE. Robotics, AI, and embedded systems. Formerly at Exquadrum.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e2e8f0;min-height:100vh;padding:22px;line-height:1.55}
+.wrap{max-width:900px;margin:0 auto}
+.back{display:inline-block;margin-bottom:14px;font-size:12px;color:#94a3b8;text-decoration:none;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em}
+.back:hover{color:#f472b6}
+
+/* HERO */
+.hero-main{background:linear-gradient(135deg,rgba(96,165,250,0.12),rgba(167,139,250,0.10));border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:26px 24px;margin-bottom:16px}
+.hero-main .eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#93c5fd;margin-bottom:8px;font-family:'JetBrains Mono',monospace}
+.hero-main h1{font-size:30px;font-weight:800;background:linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px;letter-spacing:-0.01em}
+.hero-main .role{color:#cbd5e1;font-size:15px;margin-top:6px}
+.tag{display:inline-block;padding:3px 10px;background:rgba(96,165,250,0.15);border:1px solid rgba(96,165,250,0.3);color:#bfdbfe;border-radius:8px;font-size:11px;font-weight:600;margin-right:6px;margin-top:10px;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em}
+
+/* GNC UPDATE (existing content preserved as "latest update" block) */
+.latest-banner{background:linear-gradient(135deg,rgba(236,72,153,0.15),rgba(59,130,246,0.12));border:1px solid rgba(236,72,153,0.25);border-radius:16px;padding:22px;margin-bottom:18px}
+.latest-banner .eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#f472b6;margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+.latest-banner h2{font-size:22px;font-weight:800;background:linear-gradient(90deg,#f472b6,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.latest-banner .tagline{color:#e2e8f0;font-size:14px;margin-top:4px}
+.tag-pink{background:rgba(236,72,153,0.15);border-color:rgba(236,72,153,0.3);color:#fbcfe8}
+
+.big{background:linear-gradient(135deg,rgba(251,191,36,0.1),rgba(236,72,153,0.08));border:1px solid rgba(251,191,36,0.25);border-radius:14px;padding:16px 18px;margin-bottom:14px;font-size:13.5px}
+.big strong{color:#fbbf24}
+
+.section{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px 20px;margin-bottom:12px}
+.section h2{font-size:15px;font-weight:700;color:#f1f5f9;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.section h2 .ico{font-size:20px}
+.section h3{font-size:13.5px;font-weight:700;color:#e2e8f0;margin-top:12px;margin-bottom:6px}
+.section h3 .date{font-family:'JetBrains Mono',monospace;color:#94a3b8;font-weight:400;font-size:11.5px;margin-left:8px}
+.section p{font-size:13.5px;color:#cbd5e1;margin-bottom:8px}
+.section ul{margin-left:0;list-style:none}
+.section li{padding:5px 0 5px 22px;font-size:13px;color:#cbd5e1;position:relative}
+.section li:before{content:'▸';position:absolute;left:4px;color:#f472b6}
+
+/* SECTION HEADERS (top-level dividers) */
+.section-header{margin:20px 0 10px 4px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:#94a3b8}
+
+.acronym{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin-top:6px;font-size:13px}
+.acronym .k{font-family:'JetBrains Mono',monospace;color:#fbbf24;font-weight:700}
+.acronym .v{color:#cbd5e1}
+
+.parent{background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(59,130,246,0.08));border:1px solid rgba(16,185,129,0.3);border-radius:14px;padding:18px 20px;margin-top:14px;font-size:13.5px}
+.parent h3{color:#6ee7b7;font-size:15px;margin-bottom:8px}
+
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.stat{background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);border-radius:10px;padding:10px 8px;text-align:center}
+.stat .n{font-size:14px;font-weight:700;color:#c4b5fd}
+.stat .l{font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-top:2px}
+
+.boss{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.25);border-radius:12px;padding:12px 14px;margin-top:10px}
+.boss .role{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#7dd3fc;margin-bottom:2px;font-family:'JetBrains Mono',monospace}
+.boss .name{font-size:14px;font-weight:700;color:#f1f5f9}
+.boss .sub{font-size:11.5px;color:#94a3b8;margin-top:3px}
+
+/* PROJECT CARDS */
+.projects{display:grid;grid-template-columns:1fr;gap:10px;margin-top:8px}
+.proj{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px}
+.proj .head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.proj .name{font-size:14px;font-weight:700;color:#f1f5f9}
+.proj .date{font-family:'JetBrains Mono',monospace;font-size:11px;color:#94a3b8}
+.proj p{font-size:12.5px;color:#cbd5e1;margin-bottom:4px}
+.proj .stack{margin-top:6px;display:flex;flex-wrap:wrap;gap:6px}
+.proj .stack span{font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:2px 7px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:6px;color:#fcd34d}
+
+/* TOOLCHAIN */
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.tools span{font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 10px;background:rgba(78,205,196,0.08);border:1px solid rgba(78,205,196,0.25);border-radius:8px;color:#5eead4}
+
+/* EDU FOOTER */
+.edu{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.edu-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px}
+.edu-card .label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#94a3b8;margin-bottom:4px}
+.edu-card .value{font-size:14px;font-weight:600;color:#f1f5f9}
+@media (max-width:600px){.edu{grid-template-columns:1fr}.stat-row{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="index.html#about">← back to about</a>
+
+<!-- HERO -->
+<div class="hero-main">
+  <div class="eyebrow">My sons · Simon</div>
+  <h1>Simon Schmidt</h1>
+  <div class="role">Computer Science · Arizona State University · Tempe, AZ<br>Focus: <strong style="color:#a78bfa">Robotics &amp; AI · Embedded flight software</strong></div>
+  <div>
+    <span class="tag">Undergrad</span>
+    <span class="tag">CS @ ASU</span>
+    <span class="tag">Robotics + AI</span>
+    <span class="tag">Embedded systems</span>
+  </div>
+</div>
+
+<!-- LATEST UPDATE: GNC (preserved from original page) -->
+<div class="section-header">▸ Latest update · Sep 2026</div>
+<div class="latest-banner">
+  <div class="eyebrow">Report update · Simon's role at ARCS</div>
+  <h2>He's on the GNC team</h2>
+  <div class="tagline">Building the flight brain of a self-landing rocket.</div>
+  <div>
+    <span class="tag tag-pink">ARCS at ASU</span>
+    <span class="tag tag-pink">Project GRACE</span>
+    <span class="tag tag-pink">GNC subteam</span>
+  </div>
+</div>
+
+<div class="big">🚀 <strong>Translation:</strong> GNC = <strong>Guidance, Navigation, and Control</strong>. It is the single hardest job on a self-landing rocket. Simon is on the team writing the software brain that decides — 200 times per second — how much to throttle the engine and which way to point the nozzle so the rocket doesn't crash.</div>
+
+<div class="section">
+  <h2><span class="ico">🧭</span>What GNC actually means, in plain English</h2>
+  <div class="acronym">
+    <div class="k">G</div><div class="v"><strong>Guidance</strong> — "Where do I want to go, and what path gets me there?" Plans the trajectory: launch profile, coast, descent, landing burn.</div>
+    <div class="k">N</div><div class="v"><strong>Navigation</strong> — "Where am I right now, how fast, and which way am I pointing?" Fuses GPS + gyros + accelerometers + barometer, 200+ times per second.</div>
+    <div class="k">C</div><div class="v"><strong>Control</strong> — "What do I do about it?" Adjusts engine throttle and thrust vector so reality matches the plan. Milliseconds of latency matter.</div>
+  </div>
+  <p style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05)">This is the same problem SpaceX had to solve for Falcon 9. It sits at the intersection of <strong>control theory</strong>, <strong>real-time software</strong>, <strong>sensor fusion</strong>, and <strong>flight dynamics</strong>. Graduate-level material — and he's doing it as an undergrad.</p>
+</div>
+
+<div class="section">
+  <h2><span class="ico">👨‍✈️</span>His direct boss</h2>
+  <div class="boss">
+    <div class="role">GNC &amp; ACS Lead / President of ARCS</div>
+    <div class="name">Aaryan Anand</div>
+    <div class="sub">Runs both the flight-control team AND the whole organization. Judging from the org's Gitea activity, he personally writes big chunks of the flight firmware (see <span style="font-family:'JetBrains Mono',monospace;color:#fbbf24">ascent-firmware</span> repo — tagged <strong>alpha-v1.0.0</strong>, has done real flights already).</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2><span class="ico">🛠️</span>What his day-to-day likely involves</h2>
+  <ul>
+    <li><strong>Control-loop tuning</strong> — writing/modifying PID or MPC (Model Predictive Control) code that keeps the rocket vertical</li>
+    <li><strong>Kalman filter work</strong> — the math that fuses noisy sensors into a clean estimate of position/velocity/attitude</li>
+    <li><strong>Simulation</strong> — running SITL (Software-In-The-Loop) tests before every flight; they have a <span style="font-family:'JetBrains Mono',monospace;color:#fbbf24">SITL CSV</span> pipeline visible in the repo</li>
+    <li><strong>Trajectory design</strong> — computing optimal ascent/descent profiles</li>
+    <li><strong>Hardware-in-the-loop testing</strong> — running the flight computer with fake sensor inputs</li>
+    <li><strong>Post-flight data analysis</strong> — pulling logs from flights, figuring out what worked and what didn't</li>
+    <li><strong>C/C++, Python, or Rust on embedded hardware</strong> — likely Teensy or NXP microcontrollers (they have a <span style="font-family:'JetBrains Mono',monospace;color:#fbbf24">TeensyXpresso</span> repo)</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2><span class="ico">📚</span>Real skills he's building right now</h2>
+  <div class="stat-row">
+    <div class="stat"><div class="n">Control</div><div class="l">theory</div></div>
+    <div class="stat"><div class="n">Embedded</div><div class="l">systems</div></div>
+    <div class="stat"><div class="n">Sensor</div><div class="l">fusion</div></div>
+    <div class="stat"><div class="n">Real-time</div><div class="l">software</div></div>
+    <div class="stat"><div class="n">Flight</div><div class="l">dynamics</div></div>
+    <div class="stat"><div class="n">Git &amp; SW</div><div class="l">engineering</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <h2><span class="ico">🎯</span>Why GNC is the crown-jewel subteam</h2>
+  <p>Every subteam on a rocket matters, but GNC is the one where <em>if you get it wrong, nothing else matters</em>. The engine can be perfect, the composites beautiful, the electronics flawless — if GNC can't keep the rocket pointed and control the descent, you get a crater. That's why GNC leads are often the technical face of any rocket program.</p>
+  <p style="margin-top:6px">On resume terms: "GNC engineer, propulsive-lander project" is arguably the single highest-signal line an aerospace undergrad can put on paper.</p>
+</div>
+
+<!-- FOCUS AREAS -->
+<div class="section-header">▸ Focus areas</div>
+<div class="section">
+  <h2><span class="ico">🤖</span>Robotics &amp; AI · embedded flight software</h2>
+  <p>Beyond ARCS, Simon has access to the <strong>DREAMS Lab</strong> — Dr. Jnaneshwar Das's robotics research group at ASU SESE. That's a rare undergrad invite; the lab does field robotics, autonomous systems, and applied AI.</p>
+  <p>His personal hardware work centers on the <span style="font-family:'JetBrains Mono',monospace;color:#fbbf24">STM32G4</span> — he's driving the power &amp; attitude system on that MCU. The broader ARCS team uses NXP GHz-class microcontrollers for guidance/navigation via the MCUXpresso SDK.</p>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section-header">▸ Experience</div>
+<div class="section">
+  <h2><span class="ico">💼</span>Exquadrum <span style="font-family:'JetBrains Mono',monospace;color:#94a3b8;font-weight:400;font-size:12px">— Victorville, CA · internship</span></h2>
+  <p>Simon interned at <strong>Exquadrum</strong>, a defense-propulsion company in Victorville, California. Exquadrum was subsequently acquired by <strong>Mach Industries</strong> and rolled into their new propulsion arm, <strong>Mach Energetics</strong>.</p>
+  <p style="color:#94a3b8;font-size:12.5px">The acquisition puts Simon's internship experience directly in the middle of the current hypersonics / next-gen propulsion wave — the same space that companies like Anduril, SpaceX, and Blue Origin are hiring aggressively into.</p>
+</div>
+
+<!-- PROJECTS -->
+<div class="section-header">▸ Personal projects</div>
+<div class="section">
+  <h2><span class="ico">🧑‍💻</span>Software he's built on his own</h2>
+  <div class="projects">
+    <div class="proj">
+      <div class="head">
+        <div class="name">Custom Shell Implementation</div>
+        <div class="date">May 2024</div>
+      </div>
+      <p>A command-line shell built from scratch. Supports built-in commands (<span style="font-family:'JetBrains Mono',monospace;color:#fcd34d">cd</span>, <span style="font-family:'JetBrains Mono',monospace;color:#fcd34d">exit</span>, <span style="font-family:'JetBrains Mono',monospace;color:#fcd34d">echo</span>, <span style="font-family:'JetBrains Mono',monospace;color:#fcd34d">pwd</span>) plus launching arbitrary programs. Involved input parsing, process management, and low-level OS work — the kind of project that teaches you how Unix actually works.</p>
+      <div class="stack"><span>Rust</span><span>Systems programming</span><span>Unix internals</span></div>
+    </div>
+    <div class="proj">
+      <div class="head">
+        <div class="name">Memory Match Game</div>
+        <div class="date">May–Jun 2023</div>
+      </div>
+      <p>Interactive memory-matching game with adjustable grid sizes, difficulty settings, input validation, and full game-state management. Heavy focus on OOP fundamentals — inheritance, polymorphism, encapsulation done properly.</p>
+      <div class="stack"><span>Java</span><span>IntelliJ IDEA</span><span>OOP</span></div>
+    </div>
+    <div class="proj">
+      <div class="head">
+        <div class="name">Blimp Attack</div>
+        <div class="date">C++ · SFML</div>
+      </div>
+      <p>A 2D side-scrolling game: player movement, procedurally generated obstacles, scrolling world, collision + boundary detection, main menu, and game-over screen. Practical game-dev experience on top of solid C++ fundamentals.</p>
+      <div class="stack"><span>C++</span><span>SFML</span><span>Game dev</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLCHAIN -->
+<div class="section-header">▸ Toolchain</div>
+<div class="section">
+  <h2><span class="ico">🧰</span>What he actually uses</h2>
+  <p style="margin-bottom:10px">Pro-grade bare-metal embedded stack. This is what senior firmware engineers use — not the beginner IDE-and-hand-holding setup.</p>
+  <div class="tools">
+    <span>nvim</span>
+    <span>Claude Code</span>
+    <span>OpenOCD</span>
+    <span>arm-none-eabi-gcc</span>
+    <span>MCUXpresso SDK</span>
+    <span>Git + Gitea</span>
+  </div>
+</div>
+
+<!-- EDUCATION FOOTER -->
+<div class="section-header">▸ At a glance</div>
+<div class="section">
+  <div class="edu">
+    <div class="edu-card">
+      <div class="label">University</div>
+      <div class="value">Arizona State University</div>
+    </div>
+    <div class="edu-card">
+      <div class="label">Major</div>
+      <div class="value">Computer Science</div>
+    </div>
+    <div class="edu-card">
+      <div class="label">Location</div>
+      <div class="value">Tempe, AZ</div>
+    </div>
+    <div class="edu-card">
+      <div class="label">Lab access</div>
+      <div class="value">DREAMS Lab · ARCS</div>
+    </div>
+  </div>
+</div>
+
+<!-- PARENT TAKE -->
+<div class="parent">
+  <h3>💬 The parent take</h3>
+  <p>Simon picked (or was picked into) the hardest and most prestigious subteam in ARCS, on a project that maps directly to what SpaceX, Blue Origin, and Rocket Lab actually do. Combine that with a Rust shell built for fun, a real Exquadrum internship, and DREAMS Lab access — and his resume is going to open serious doors when he graduates.</p>
+  <p style="margin-top:8px"><strong>Good questions to ask him:</strong></p>
+  <ul style="margin-top:4px;margin-left:0;list-style:none">
+    <li style="padding:4px 0 4px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#6ee7b7">✓</span>What programming language is the GNC stack in? (C/C++/Rust/Python)</li>
+    <li style="padding:4px 0 4px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#6ee7b7">✓</span>Are you working on the ascent guidance or the landing burn?</li>
+    <li style="padding:4px 0 4px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#6ee7b7">✓</span>How do you simulate before you fly? (SITL / HITL)</li>
+    <li style="padding:4px 0 4px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#6ee7b7">✓</span>What's the sensor stack — IMU brand? GPS? Barometer?</li>
+    <li style="padding:4px 0 4px 20px;position:relative;font-size:13px"><span style="position:absolute;left:0;color:#6ee7b7">✓</span>How often is the team hotfiring or hop-testing?</li>
+  </ul>
+</div>
+
+<div style="text-align:center;color:#64748b;font-size:11px;margin-top:18px">
+  <a href="index.html#about" style="color:#94a3b8;text-decoration:none;font-family:'JetBrains Mono',monospace">← back to about</a>
+  &nbsp;·&nbsp; Cast · Sep 12, 2026 · updated Sep 19, 2026
+</div>
+</div>
+</body>
+</html>
