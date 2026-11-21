@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1020"/>
+      <stop offset="0.55" stop-color="#141026"/>
+      <stop offset="1" stop-color="#1b0d1a"/>
+    </linearGradient>
+    <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#60a5fa"/>
+      <stop offset="0.6" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="640" height="360" fill="url(#bg)"/>
+
+  <!-- critical strip -->
+  <rect x="298" y="34" width="44" height="292" fill="#a78bfa" opacity="0.07"/>
+  <line x1="320" y1="34" x2="320" y2="326" stroke="#a78bfa" stroke-width="1.4" stroke-dasharray="5 6" opacity="0.55"/>
+
+  <!-- zeta trace -->
+  <path d="M40 232 C 90 232 120 150 160 150 C 200 150 214 300 250 300 C 278 300 292 96 320 96 C 348 96 362 268 392 268 C 424 268 436 176 474 176 C 512 176 528 214 600 214"
+        fill="none" stroke="url(#stroke)" stroke-width="2.6" filter="url(#glow)" opacity="0.95"/>
+
+  <!-- zeros on the line -->
+  <g fill="#f9a8d4">
+    <circle cx="320" cy="96" r="3.4"/>
+    <circle cx="320" cy="150" r="2.4" opacity="0.5"/>
+    <circle cx="320" cy="214" r="2.4" opacity="0.5"/>
+    <circle cx="320" cy="268" r="2.8" opacity="0.7"/>
+  </g>
+
+  <!-- zeta glyph -->
+  <text x="46" y="96" font-family="Georgia, 'Times New Roman', serif" font-size="64" fill="#e2e8f0" opacity="0.16">ζ(s)</text>
+
+  <!-- sqrt X chain -->
+  <g stroke="#5eead4" stroke-width="1.5" opacity="0.75">
+    <line x1="432" y1="72" x2="462" y2="96"/><line x1="462" y1="96" x2="492" y2="72"/>
+    <line x1="492" y1="72" x2="522" y2="96"/><line x1="522" y1="96" x2="552" y2="72"/>
+  </g>
+  <g fill="#5eead4" opacity="0.85">
+    <circle cx="432" cy="72" r="3"/><circle cx="462" cy="96" r="3"/>
+    <circle cx="492" cy="72" r="3"/><circle cx="522" cy="96" r="3"/><circle cx="552" cy="72" r="3"/>
+  </g>
+  <text x="432" y="122" font-family="'JetBrains Mono', monospace" font-size="15" fill="#5eead4" opacity="0.85">θ-lift chain · √X</text>
+
+  <!-- label -->
+  <text x="46" y="330" font-family="'JetBrains Mono', monospace" font-size="13" letter-spacing="2.6" fill="#8b93a1">UNVERIFIED CLAIM · 2026</text>
+</svg>
